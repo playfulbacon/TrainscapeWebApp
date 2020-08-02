@@ -1,0 +1,24 @@
+{
+  "name": "trainscape",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "engines": {
+    "node": "12.17.x"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bufferutil": "^4.0.1",
+    "express": "^4.17.1",
+    "http": "0.0.1-security",
+    "http-server": "^0.12.3",
+    "utf-8-validate": "^5.0.2",
+    "ws": "^7.3.1"
+  }
+}

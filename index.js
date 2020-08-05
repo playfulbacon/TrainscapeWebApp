@@ -2,13 +2,14 @@
 
 const express = require('express');
 const WebSocket = require('ws');
+const server = require('http').createServer();
+const app = require('./http-server');
 
-const PORT = process.env.PORT || 3000;
-const INDEX = 'public/index.html';
+const port = process.env.PORT || 3000;
 
-const server = express()
-  .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
-  .listen(PORT, () => console.log(`Listening on ${PORT}`));
+// Mount our express HTTP router into our server
+server.on('request', app);
+server.listen(port, () => console.log(`Free Radish is listening on port ${port}`));
 
 const wss = new WebSocket.Server({ server });
 

@@ -47,12 +47,18 @@ wss.on('connection', (ws) => {
 
           rooms.set(ws.room, []);
           roomClients.set(ws.room, ws);
+          
           const response = {
               messageType: 'ROOM_CREATED_SUCCESS',
               roomCode: roomCode
           }
 
           ws.send(JSON.stringify(response));
+      }
+      break;
+
+      case 'TEST': {
+        broadcast(message);
       }
       break;
 
@@ -76,7 +82,8 @@ wss.on('connection', (ws) => {
               messageType: 'PLAYER_JOINED',
               roomCode: ws.room,
           }
-          broadcast(JSON.stringify(response));
+          broadcastToRoom(ws.room, JSON.stringify(response));
+          //broadcast(JSON.stringify(response));
         }
     }
     break;
@@ -92,6 +99,16 @@ function generateRoomCode(){
     result += characters.charAt(Math.floor(Math.random() * characters.length));
   }
   return result;
+}
+
+function broadcastToRoom(room, message) {
+  const players = rooms.get(room);
+
+  players.forEach((player) => {
+      if (player.client.readyState === WebSocket.OPEN) {
+          player.client.send(message);
+      }
+  });
 }
 
 function broadcast(message) {

@@ -2,53 +2,58 @@
 
 <body>
   <h1>Trainscape</h1>
-  <p>Websocket Test v3</p>
+  <input type="text" id="roomCode" placeholder="ROOM CODE"
+    style="display: block; width: 100%; margin-bottom: 10px; padding: 10px; text-transform: uppercase;"
+    maxlength="4" />
+  <button id="connect-button" title="Connect" style="width: 100%; height: 30px;">Connect</button>
+  <button id="test-button" title="Test" style="width: 100%; height: 30px;">Test</button>
   <pre id="messages" style="height: 400px; overflow: scroll"></pre>
-  <input type="text" id="messageBox" placeholder="Type your message here"
-    style="display: block; width: 100%; margin-bottom: 10px; padding: 10px;" />
-  <button id="send" title="Send Message!" style="width: 100%; height: 30px;">Send Message</button>
 
   <script>
     (function () {
-      const sendBtn = document.querySelector('#send');
-      const messages = document.querySelector('#messages');
-      const messageBox = document.querySelector('#messageBox');
 
-      let ws;
+      var roomCode = '';
+
+      const ws = new WebSocket(location.origin.replace(/^http/, 'ws'));
+
+      ws.onopen = () => {
+        console.log('Connection opened!');
+      }
+
+      ws.onmessage = (message) => {
+        var webAppMessage = JSON.parse(message.data);
+
+        if (webAppMessage.roomCode.toLowerCase() == roomCode){
+          showMessage(message.data);
+        }
+      }
+
+      ws.onclose = function () {
+        ws = null;
+      }
+
+      const connectBtn = document.querySelector('#connect-button');
+      const textBtn = document.querySelector('#test-button');
+      const messages = document.querySelector('#messages');
+      const roomCodeInput = document.querySelector('#roomCode');
+
+      connectBtn.onclick = function(){
+        console.log("connect button pressed");
+
+        roomCode =  document.querySelector('#roomCode').value.toLowerCase();
+        var joinRequest = {
+            messageType: 'ROOM_JOIN_REQUEST',
+            roomCode,
+        };
+
+        ws.send(JSON.stringify(joinRequest));
+      }
 
       function showMessage(message) {
         messages.textContent += `\n\n${message}`;
         messages.scrollTop = messages.scrollHeight;
       }
 
-      function init() {
-        if (ws) {
-          ws.onerror = ws.onopen = ws.onclose = null;
-          ws.close();
-        }
-
-        ws = new WebSocket(location.origin.replace(/^http/, 'ws'));
-        ws.onopen = () => {
-          console.log('Connection opened!');
-        }
-        ws.onmessage = ({ data }) => showMessage(data);
-        ws.onclose = function () {
-          ws = null;
-        }
-      }
-
-      sendBtn.onclick = function () {
-        if (!ws) {
-          showMessage("No WebSocket connection :(");
-          return;
-        }
-
-        ws.send(messageBox.value);
-        showMessage(messageBox.value);
-        messageBox.value = '';
-      }
-
-      init();
     })();
   </script>
 </body>

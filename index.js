@@ -1,6 +1,5 @@
 'use strict';
 
-const express = require('express');
 const WebSocket = require('ws');
 const server = require('http').createServer();
 const app = require('./http-server');
@@ -33,23 +32,67 @@ wss.on('connection', (ws) => {
   ws.on('message', (message) => {
 
     var webAppMessage = JSON.parse(message);
-    ws.room = webAppMessage.roomCode.toLowerCase();
+
+    if (webAppMessage.roomCode)
+      ws.room = webAppMessage.roomCode;
 
     switch (webAppMessage.messageType) {
       case 'CREATE_ROOM_REQUEST': {
+
+        var roomCode = generateRoomCode();
+        while (rooms.has(roomCode))
+          roomCode = generateRoomCode();
+
+          ws.room = roomCode;
+
           rooms.set(ws.room, []);
           roomClients.set(ws.room, ws);
           const response = {
               messageType: 'ROOM_CREATED_SUCCESS',
-              roomCode: ws.room
+              roomCode: roomCode
           }
+
           ws.send(JSON.stringify(response));
       }
       break;
+
+      case 'ROOM_JOIN_REQUEST': {
+        if (!rooms.has(ws.room)) {
+            // Tried to connect to a non-existent room
+            const response = {
+                messageType: 'ERROR_INVALID_ROOM',
+                roomCode: ws.room,
+            }
+            ws.send(JSON.stringify(response));
+        } 
+        else {
+          ws.inGame = true;
+          const players = rooms.get(ws.room);
+          players.push({
+              client: ws
+          });
+          rooms.set(ws.room, players);
+          const response = {
+              messageType: 'PLAYER_JOINED',
+              roomCode: ws.room,
+          }
+          broadcast(JSON.stringify(response));
+        }
     }
-    
+    break;
+    }
+
   })
 });
+
+function generateRoomCode(){
+  var result = '';
+  var characters = 'abcdefghijklmnopqrstuvwxyz';
+  for (var i = 0; i < 4; i++) {
+    result += characters.charAt(Math.floor(Math.random() * characters.length));
+  }
+  return result;
+}
 
 function broadcast(message) {
   wss.clients.forEach((client) => {

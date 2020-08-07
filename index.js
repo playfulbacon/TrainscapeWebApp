@@ -17,6 +17,8 @@ const roomClients = new Map();
 // Add a test room manually
 rooms.set('test', []);
 
+const ignoreRoomCodes = ['test', 'tits', 'jizz', 'fuck', 'shit', 'piss', 'hoes'];
+
 const wss = new WebSocket.Server({ server });
 
 wss.on('connection', (ws) => {
@@ -40,7 +42,7 @@ wss.on('connection', (ws) => {
       case 'CREATE_ROOM_REQUEST': {
 
         var roomCode = generateRoomCode();
-        while (rooms.has(roomCode))
+        while (rooms.has(roomCode) && !ignoreRoomCodes.has(roomCode))
           roomCode = generateRoomCode();
 
           ws.room = roomCode;
@@ -58,7 +60,7 @@ wss.on('connection', (ws) => {
       break;
 
       case 'TEST': {
-        broadcast(message);
+        broadcastToRoom(ws.room, message);
       }
       break;
 
@@ -104,6 +106,9 @@ function generateRoomCode(){
 function broadcastToRoom(room, message) {
   const players = rooms.get(room);
 
+  if (players == undefined)
+    return;
+    
   players.forEach((player) => {
       if (player.client.readyState === WebSocket.OPEN) {
           player.client.send(message);

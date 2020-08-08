@@ -1,0 +1,98 @@
+.ticket{
+    background-image: url("../img/ticket.png");
+    background-repeat: no-repeat, repeat;
+    background-color: transparent;
+    background-attachment: scroll;
+    background-position: 50% 50%;
+    height: 342px;
+    position: relative;
+    
+}
+
+.title{
+    font-family: "Courier New", Courier, monospace;
+    font-size: 60px;
+    letter-spacing: 2px;
+    font-weight: 700;
+    text-decoration: none solid rgb(255, 255, 255);
+    font-style: normal;
+    font-variant: normal;
+    text-transform: uppercase;
+    color: #444443;
+    text-shadow: #e0e0e0 1px 1px 0;
+    text-align: center;
+    position: absolute;
+    top: 20%;
+    left: 48%;
+    transform: translate(-50%, -50%);
+    border: none;
+        -webkit-mask-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/8399/grunge.png');
+    -webkit-mask-size: 944px 604px;
+    mix-blend-mode: multiply;
+
+}
+
+.border{
+    border-bottom: 4px dashed #444443;
+    position: relative;
+    top:54%;
+    -moz-transform: rotate(90deg) translate(-14px, 0px);
+    -webkit-transform: rotate(90deg) translate(-14px, 0px);
+    -o-transform: rotate(90deg) translate(-14px, 0px);
+    -ms-transform: rotate(90deg) translate(-14px, 0px);
+    transform: rotate(90deg) translate(-14px, 0px);
+    width: 320px;
+    left: 53%;
+}
+
+.ticket-number{
+    font-family: "Courier New", Courier, monospace;
+    font-size: 60px;
+    text-decoration: none solid rgb(255, 255, 255);
+    font-style: normal;
+    font-weight: 900;
+    font-variant: normal;
+    text-transform: uppercase;
+    background: transparent;
+    border: 4px double #982323;
+    position: absolute;
+    left:34.7%;
+    width: 495px;
+    text-align: center;
+    color: darkred;
+    top:40%;
+    -webkit-mask-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/8399/grunge.png');
+    -webkit-mask-size: 944px 604px;
+    mix-blend-mode: multiply;
+
+}
+
+.stamp {
+	color: #555;
+	font-size: 40;
+	font-weight: 700;
+	border: 4px solid #555;
+	display: inline-block;
+	padding: 0.25rem 1rem;
+	text-transform: uppercase;
+	border-radius: 1rem;
+	font-family: 'Courier';
+	-webkit-mask-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/8399/grunge.png');
+    -webkit-mask-size: 944px 604px;
+    mix-blend-mode: multiply;
+}
+
+.connect {
+	color: #0A9928;
+	border: 0.5rem solid #0A9928;
+    border-radius: 0;
+} 
+
+.broadcast{
+  color:darkslategrey;
+  border: 4px double #C4C4C4;
+  font-size: 40;
+  font-family:'Courier';
+  border-radius: 0;
+  padding: 0.5rem;
+}

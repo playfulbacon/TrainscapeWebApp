@@ -1,27 +1,39 @@
-<!doctype html>
-
 <html>
-
-  <head>
-  <title>Trainscape</title>
-  <link rel="stylesheet" href="css/style.css">
-  </head>
-
-  <body>
-
-    <div class="ticket">
-      <div class="title">TRAINSCAPE</div>
-      <input type="text" id="roomCode" class="ticket-number" placeholder="TICKET NUMBER" maxlength="4" />
+    <head>
+    <title>Trainscape</title>
+  <link rel="stylesheet" href="css/style2.css">
+        
+    </head>
+        <body>
+      
+<div class="box">
+    <div class="mask"><img src="https://www.onlygfx.com/wp-content/uploads/2020/06/grunge-halftone-texture-overlay-4.png" width="600" height="400"/></div>
+    <div class="paper"><img src="https://www.onlygfx.com/wp-content/uploads/2016/07/simple-old-paper-vol-2-8-768x493.jpg"/></div>
+  <div class="ticket">
+    <span class="logo">TRAINSCAPE</span>
+    <span class="logo airlineslip">TRAINSCAPE</span>
+    <span class="boarding">Passenger Pass</span>
+    <div class="content">
+     <span class="ticket-number">Ticket Number<br><input type="text" id="roomCode" class="ticket-number" placeholder="xxxx" maxlength="4" />
+</span>
       <button id="connect-button" class="stamp connect"title="Connect" >Connect</button>
-      <button id="test-button" class="stamp broadcast" title="Test" >Broadcast</button>
+       
+      <div class="sub-content">
+        
+<!--        <span class="watermark">Trainscape</span>-->
+        <span class="name">PASSENGER NAME<br><input type="text" id="passName" class="passName" placeholder="Name" maxlength="15" /></span>
+
+        <span class="boardingtime">BOARDING TIME<br><span>8:25PM ON AUGUST 2020</span></span>
+       <button id="test-button" class="stamp broadcast" title="Test" >Broadcast</button>
+      </div>
     </div>
-    
-    <div class="tear"></div>
-
-    <pre id="messages" ></pre>
-
-  </body>
-
-  <script type="application/javascript" src="js/roomcode.js"></script>
-
+    <div class="barcode"><span class="credit">Made by: Andy Bacon, Lisa Trac and Marina Lucio</span></div>
+    <div class="barcode slip"></div>
+  </div>
+</div>
+            
+            
+      <pre id="messages" ></pre>
+      <script type="application/javascript" src="js/roomcode.js"></script>
+            </body>
 </html>

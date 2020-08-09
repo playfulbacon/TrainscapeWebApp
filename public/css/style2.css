@@ -344,7 +344,6 @@ input{
   color:#444443;
   border: 4px solid #444443;
   font-size: 25px;
-  font-family:'Courier';
   border-radius: 0;
   left: 410px;
     top: 30px;
@@ -367,7 +366,3 @@ input{
     top:-5px;
 }
 
-.credit{
-
-    
-}

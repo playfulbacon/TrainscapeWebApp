@@ -1,0 +1,373 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Inline&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Vast+Shadow&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+
+body{
+  margin: 0;
+  padding: 0;
+  background: #fff;
+}
+
+.box{
+  position: absolute;
+  top: calc(50% - 125px);
+  top: -webkit-calc(50% - 125px);
+  left: calc(50% - 300px);
+  left: -webkit-calc(50% - 300px);
+    
+}
+
+.mask{
+    position: absolute;
+    z-index: 1;
+    filter: sepia();
+    mix-blend-mode:overlay;
+    opacity: 100%;
+    clip: rect(0px,615px,250px,0px);
+}
+
+.paper{
+    position: absolute;
+    z-index: 1;
+    filter: sepia();
+    mix-blend-mode:multiply;
+    opacity: 100%;
+    top: -7%;
+    left: -2.5%;
+    clip: rect(0px,615px,250px,0px);
+}
+
+input{
+    position:absolute;
+    z-index: 2;
+    background: transparent;
+    border: none;
+    font-family: 'Special Elite', cursive;
+    font-size: 20px;
+}
+
+
+
+
+.ticket{
+  width: 600px;
+  height: 250px;
+  background: #de3322;
+  border-radius: 3px;
+  box-shadow: 0 0 100px #aaa;
+  border-top: 1px solid #de3322;
+  border-bottom: 1px solid #de3322;
+}
+
+
+
+.ticket:after{
+  content: '';
+  position: absolute;
+  right: 200px;
+  top: 0px;
+  width: 2px;
+  height: 250px;
+  box-shadow: inset 0 0 0 #de3322,
+    inset 0 -10px 0 #b62d1f,
+    inset 0 -20px 0 #de3322,
+    inset 0 -30px 0 #b62d1f,
+    inset 0 -40px 0 #de3322,
+    inset 0 -50px 0 #999999,
+    inset 0 -60px 0 #ffe8c3,
+    inset 0 -70px 0 #999999,
+    inset 0 -80px 0 #ffe8c3,
+    inset 0 -90px 0 #999999,
+    inset 0 -100px 0 #ffe8c3,
+    inset 0 -110px 0 #999999,
+    inset 0 -120px 0 #ffe8c3,
+    inset 0 -130px 0 #999999,
+    inset 0 -140px 0 #fff5e4,
+    inset 0 -150px 0 #B0B0B0,
+    inset 0 -160px 0 #fff5e4,
+    inset 0 -170px 0 #B0B0B0,
+    inset 0 -180px 0 #fff5e4,
+    inset 0 -190px 0 #B0B0B0,
+    inset 0 -200px 0 #fff5e4,
+    inset 0 -210px 0 #B0B0B0,
+    inset 0 -220px 0 #de3322,
+    inset 0 -230px 0 #b62d1f,
+    inset 0 -240px 0 #de3322,
+    inset 0 -250px 0 #b62d1f;
+}
+
+.ticket:before{
+  content: '';
+  position: absolute;
+  z-index: 5;
+  right: 199px;
+  top: 0px;
+  width: 1px;
+  height: 250px;
+  box-shadow: inset 0 0 0 #de3322,
+    inset 0 -10px 0 #b62d1f,
+    inset 0 -20px 0 #de3322,
+    inset 0 -30px 0 #b62d1f,
+    inset 0 -40px 0 #de3322,
+    inset 0 -50px 0 #999999,
+    inset 0 -60px 0 #ffe8c3,
+    inset 0 -70px 0 #999999,
+    inset 0 -80px 0 #ffe8c3,
+    inset 0 -90px 0 #999999,
+    inset 0 -100px 0 #ffe8c3,
+    inset 0 -110px 0 #999999,
+    inset 0 -120px 0 #ffe8c3,
+    inset 0 -130px 0 #999999,
+    inset 0 -140px 0 #fff5e4,
+    inset 0 -150px 0 #B0B0B0,
+    inset 0 -160px 0 #fff5e4,
+    inset 0 -170px 0 #B0B0B0,
+    inset 0 -180px 0 #fff5e4,
+    inset 0 -190px 0 #B0B0B0,
+    inset 0 -200px 0 #fff5e4,
+    inset 0 -210px 0 #B0B0B0,
+    inset 0 -220px 0 #de3322,
+    inset 0 -230px 0 #b62d1f,
+    inset 0 -240px 0 #de3322,
+    inset 0 -250px 0 #b62d1f;
+}
+
+.content{
+  position: absolute;
+  top: 40px;
+  width: 100%;
+  height: 170px;
+  background: #fff5e4;
+}
+
+.logo{
+  position: absolute;
+  left: 10px;
+  font-family: 'Bungee Inline', cursive;
+  font-size: 25px;
+  color:antiquewhite;
+    top: -5px;
+}
+
+.ticket-number{
+  position: absolute;
+  top: 5px;
+  left: 10px;
+  font-family: 'Vast Shadow', cursive;
+  font-weight: bold;
+  font-size: 14px;
+  color: #de3322;
+}
+
+.ticket-number>input{
+    background: transparent;
+    border: none;
+    font-family: 'Special Elite', cursive;
+    font-size: 40px;
+    top:20px;
+    width: 300px;
+    text-align: center;
+    color: #222;
+    margin-top: 5px;
+    text-transform: uppercase;
+}
+
+.boarding{
+  position: absolute;
+  top: 15px;
+  right: 210px;
+  font-family: 'Vast Shadow', cursive;
+  font-size: 15px;
+  color: antiquewhite;
+}
+
+
+.sub-content{
+  background: #ffe8c3;
+  width: 100%;
+  height: 100px;
+  position: absolute;
+  top: 70px;
+}
+
+/*.watermark{
+  position: absolute;
+  left: 5px;
+  top: -50px;
+  font-family: 'Bungee Inline', cursive;
+  font-size: 85px;
+  color:antiquewhite;
+  z-index: 1;
+    mix-blend-mode:multiply;
+}*/
+
+.name{
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-family: 'Vast Shadow', cursive;
+  font-weight: bold;
+  font-size: 14px;
+  color: #de3322;
+}
+
+.name span{
+  color: #555;
+  font-size: 17px;
+    font-family: Arial;
+}
+
+.flight{
+  position: absolute;
+  top: 10px;
+  left: 180px;
+  font-family: Arial Narrow, Arial;
+  font-weight: bold;
+  font-size: 14px;
+  color: #999;
+}
+
+.flight span{
+  color: #555;
+  font-size: 17px;
+}
+
+.gate{
+  position: absolute;
+  top: 10px;
+  left: 280px;
+  font-family: Arial Narrow, Arial;
+  font-weight: bold;
+  font-size: 14px;
+  color: #999;
+}
+
+.gate span{
+  color: #555;
+  font-size: 17px;
+}
+
+
+.seat{
+  position: absolute;
+  top: 10px;
+  left: 350px;
+  font-family: Arial Narrow, Arial;
+  font-weight: bold;
+  font-size: 14px;
+  color: #999;
+}
+
+.seat span{
+  color: #555;
+  font-size: 17px;
+}
+
+.boardingtime{
+  position: absolute;
+  top: 60px;
+  left: 10px;
+  font-family: 'Vast Shadow', cursive;
+  font-weight: bold;
+  font-size: 14px;
+  color: #de3322;
+}
+
+.boardingtime span{
+  color: #555;
+  font-family: 'Special Elite', cursive;
+  font-size: 17px;
+    font-weight: 100
+}
+
+.barcode{
+  position: absolute;
+  left: 8px;
+  bottom: 6px;
+  height: 30px;
+  width: 500px;       
+    color:antiquewhite;
+  font-family: 'Special Elite', cursive;
+  font-size: 10px;
+    font-weight: 100
+       
+}
+
+.slip{
+  left: 455px;
+}
+
+.nameslip{
+  top: 60px;
+  left: 410px;
+}
+
+.flightslip{
+  left: 410px;
+}
+
+.seatslip{
+  left: 540px;
+}
+
+.stamp {
+	color: #555;
+	font-size: 40;
+	font-weight: 700;
+	border: 4px solid #555;
+	display: inline-block;
+	padding: 0.25rem 1rem;
+	text-transform: uppercase;
+	border-radius: 1rem;
+	font-family: 'Courier';
+    width: 180px;
+    position: absolute;
+    top: 10px;
+    left: 20px;
+	-webkit-mask-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/8399/grunge.png');
+    -webkit-mask-size: 944px 604px;
+    mix-blend-mode: multiply;
+    z-index: 2;
+}
+
+.connect {
+	color: #0A9928;
+	border: 4px solid #0A9928;
+    border-radius: 0;
+    font-size: 30px;
+    top: 10px;
+    left: 410px;
+      
+} 
+
+.broadcast{
+  color:#444443;
+  border: 4px solid #444443;
+  font-size: 25px;
+  font-family:'Courier';
+  border-radius: 0;
+  left: 410px;
+    top: 30px;
+}
+
+
+.sfoslip{
+  font-size: 30px;
+  top: 20px;
+  left: 530px;
+}
+
+.planeslip{
+  top: 10px;
+  left: 475px;
+}
+
+.airlineslip{
+  left: 425px;
+    top:-5px;
+}
+
+.credit{
+
+    
+}

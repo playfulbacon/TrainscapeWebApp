@@ -12,8 +12,10 @@ server.listen(port, () => console.log(`Listening on port ${port}`));
 
 // Rooms is a map of room codes to a list of players in that room
 const rooms = new Map();
+
 // RoomClients is a map of room codes to the room client itself
 const roomClients = new Map();
+
 // Add a test room manually
 rooms.set('test', []);
 
@@ -59,11 +61,6 @@ wss.on('connection', (ws) => {
       }
       break;
 
-      case 'TEST': {
-        broadcastToRoom(ws.room, message);
-      }
-      break;
-
       case 'ROOM_JOIN_REQUEST': {
         if (!rooms.has(ws.room)) {
             // Tried to connect to a non-existent room
@@ -89,6 +86,12 @@ wss.on('connection', (ws) => {
         }
     }
     break;
+
+    default: {
+      broadcastToRoom(ws.room, message);
+    }
+    break;
+    
     }
 
   })

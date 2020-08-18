@@ -14,6 +14,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
         if (webAppMessage.roomCode.toLowerCase() == roomCode){
           showMessage(message.data);
         }
+
+        if (webAppMessage.messageType == "PUZZLE_SETUP"){
+          setupTestPuzzle(JSON.parse(webAppMessage.data));
+        }
       }
 
       ws.onclose = function () {
@@ -50,14 +54,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
       });
 
       testPuzzleBtn.addEventListener('click', function(){
-
         fetch('/testPuzzle.html')
           .then((response) => {
               return response.text();
           })
           .then((body) => {
               document.querySelector('#game-content').innerHTML = body;
-              initializeTestPuzzle();
+              requestPuzzleSetup();
           });
       });
 
@@ -83,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         }
 
         var buttonPressedMessage = {
-            messageType: 'TEST_PUZZLE_BUTTON_PRESSED',
+            messageType: 'PUZZLE_BUTTON_PRESSED',
             roomCode: roomCode,
             data: JSON.stringify(webAppData)
         };
@@ -92,10 +95,26 @@ document.addEventListener("DOMContentLoaded", function(event) {
       }
 
       // Once the HTML for the puzzle has loaded, set up listeners
-      function initializeTestPuzzle() {
-        console.log("initialize puzzle");
+      function requestPuzzleSetup() {
 
-        for(let i = 0; i < 9; i++){
+        var test = {
+          messageType: 'REQUEST_PUZZLE_SETUP',
+          roomCode: roomCode,
+        };
+
+        ws.send(JSON.stringify(test));
+      }
+
+      function setupTestPuzzle(webAppSetup){
+        
+        var answerSequence = webAppSetup.answerSequence;
+
+        for(var i = 0; i < answerSequence.length; i++){
+          document.querySelector('#answer-' + i).innerHTML = answerSequence[i].symbolIndex;
+          document.querySelector('#answer-' + i).style.color = "#" + webAppSetup.colors[answerSequence[i].colorIndex];
+        }
+        
+        for(let i = 0; i < webAppSetup.buttonRows * webAppSetup.buttonCols; i++){
           document.querySelector('#puzzle-button-' + i).addEventListener('click',function(){puzzleButtonPressed(i)});
         }
       }

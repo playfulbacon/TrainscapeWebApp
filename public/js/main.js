@@ -116,6 +116,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         
         for(let i = 0; i < webAppSetup.buttonRows * webAppSetup.buttonCols; i++){
           document.querySelector('#puzzle-button-' + i).addEventListener('click',function(){puzzleButtonPressed(i)});
+          document.querySelector('#puzzle-button-' + i).innerHTML = webAppSetup.puzzleInputs[i].symbolIndex;
         }
       }
 

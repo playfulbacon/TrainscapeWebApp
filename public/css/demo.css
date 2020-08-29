@@ -1,0 +1,41 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron&display=swap");
+@import url('https://fonts.googleapis.com/css?family=VT323&subset=latin-ext');
+
+body{
+  background: -webkit-radial-gradient(50% 50%, ellipse, #20202D 0%, #101018 75%, #060612 100%);
+  background: -moz-radial-gradient(50% 50%, ellipse, #20202D 0%, #101018 75%, #060612 100%);
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0; 
+}
+
+.connect{
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.hackerid{
+    font-family: "Orbitron", sans-serif;
+    height: 5%;
+}
+
+.connect-button{
+     font-family: 'VT323', monospace;
+     margin-left: 20px;
+    height: 5%;
+    width: 5%;
+    font-size: 25px;
+}
+
+p{
+    font-family: 'VT323', monospace;
+    color: chartreuse;
+    font-size: 23px;
+    position: absolute;
+    top:36%;
+    left: 35%;
+}

@@ -22,6 +22,18 @@ document.addEventListener("DOMContentLoaded", function(event) {
         if (webAppMessage.messageType == "STORAGE_BOX_SETUP"){
           setupStorageBox(JSON.parse(webAppMessage.data));
         }
+
+        if (webAppMessage.messageType == "DRINK_DISPENSER_SETUP"){
+          setupDrinkDispenser(JSON.parse(webAppMessage.data));
+        }
+
+        if (webAppMessage.messageType == "BARTENDER_BOT_SETUP"){
+          setupBartenderBot(JSON.parse(webAppMessage.data));
+        }
+
+        if (webAppMessage.messageType == "GUARD_BOT_SETUP"){
+          setupGuardBot(JSON.parse(webAppMessage.data));
+        }
       }
 
       ws.onclose = function () {
@@ -33,6 +45,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
       const messages = document.querySelector('#messages');
       const machineDoorPanelButton = document.querySelector('#machine-door-panel-button');
       const machineStorageBoxButton = document.querySelector('#machine-storage-box-button');
+      const machineDrinkDispenserButton = document.querySelector('#machine-drink-dispenser-button');
+      const botGuardButton = document.querySelector('#bot-guard-button');
+      const botBartenderButton = document.querySelector('#bot-bartender-button');
       const testCssBtn = document.querySelector('#test-css-button');
 
       connectBtn.addEventListener('click', function(){
@@ -65,7 +80,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
           })
           .then((body) => {
               document.querySelector('#game-content').innerHTML = body;
-              requestDoorPanelSetup();
+              
+              var test = {
+                messageType: 'REQUEST_DOOR_PANEL_SETUP',
+                roomCode: roomCode,
+              };
+      
+              ws.send(JSON.stringify(test));
           });
       });
 
@@ -76,7 +97,65 @@ document.addEventListener("DOMContentLoaded", function(event) {
           })
           .then((body) => {
               document.querySelector('#game-content').innerHTML = body;
-              requestStorageBoxSetup();
+              
+              var test = {
+                messageType: 'REQUEST_STORAGE_BOX_SETUP',
+                roomCode: roomCode,
+              };
+      
+              ws.send(JSON.stringify(test));
+          });
+      });
+
+      machineDrinkDispenserButton.addEventListener('click', function(){
+        fetch('/machineDrinkDispenser.html')
+          .then((response) => {
+              return response.text();
+          })
+          .then((body) => {
+              document.querySelector('#game-content').innerHTML = body;
+                
+              var test = {
+                messageType: 'REQUEST_DRINK_DISPENSER_SETUP',
+                roomCode: roomCode,
+              };
+
+              ws.send(JSON.stringify(test));
+          });
+      });
+
+      botBartenderButton.addEventListener('click', function(){
+        fetch('/bot.html')
+          .then((response) => {
+              return response.text();
+          })
+          .then((body) => {
+              document.querySelector('#game-content').innerHTML = body;
+              
+              var test = {
+                messageType: 'REQUEST_BARTENDER_BOT_SETUP',
+                roomCode: roomCode,
+              };
+      
+              ws.send(JSON.stringify(test));
+          });
+      });
+
+      
+      botGuardButton.addEventListener('click', function(){
+        fetch('/bot.html')
+          .then((response) => {
+              return response.text();
+          })
+          .then((body) => {
+              document.querySelector('#game-content').innerHTML = body;
+              
+              var test = {
+                messageType: 'REQUEST_GUARD_BOT_SETUP',
+                roomCode: roomCode,
+              };
+      
+              ws.send(JSON.stringify(test));
           });
       });
 
@@ -110,35 +189,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
         ws.send(JSON.stringify(message));
       }
 
-      // Once the HTML for the puzzle has loaded, set up listeners
-      function requestDoorPanelSetup() {
-
-        var test = {
-          messageType: 'REQUEST_DOOR_PANEL_SETUP',
-          roomCode: roomCode,
-        };
-
-        ws.send(JSON.stringify(test));
-      }
-
-      function requestStorageBoxSetup() {
-
-        var test = {
-          messageType: 'REQUEST_STORAGE_BOX_SETUP',
-          roomCode: roomCode,
-        };
-
-        ws.send(JSON.stringify(test));
-      }
-
       function setupDoorPanel(webAppSetup){
         
         var answerSequence = webAppSetup.answerSequence;
-
-        for(var i = 0; i < answerSequence.length; i++){
-          document.querySelector('#answer-' + i).innerHTML = answerSequence[i].symbolIndex;
-          document.querySelector('#answer-' + i).style.color = "#" + webAppSetup.colors[answerSequence[i].colorIndex];
-        }
         
         for(let i = 0; i < webAppSetup.buttonRows * webAppSetup.buttonCols; i++){
           document.querySelector('#puzzle-button-' + i).addEventListener('click',function(){doorPanelButtonPressed(i)});
@@ -164,6 +217,40 @@ document.addEventListener("DOMContentLoaded", function(event) {
   
           ws.send(JSON.stringify(message));
         });
+      }
+
+      function setupDrinkDispenser(webAppSetup){    
+        for(let i = 0; i < 6; i++){
+          document.querySelector('#puzzle-button-' + i).addEventListener('click',function(){drinkDispenserButtonPressed(i)});
+        }
+      }
+
+      function setupBartenderBot(webAppSetup){
+        var drinkRecipe = webAppSetup.drinkRecipe;       
+        document.querySelector('#bot-content').innerHTML = drinkRecipe;
+      }
+
+      function setupGuardBot(webAppSetup){
+        var answerSequence = webAppSetup.answerSequence;
+
+        for(var i = 0; i < answerSequence.length; i++){
+          document.querySelector('#answer-' + i).innerHTML = answerSequence[i].symbolIndex;
+          document.querySelector('#answer-' + i).style.color = "#" + webAppSetup.colors[answerSequence[i].colorIndex];
+        }
+      }
+
+      function drinkDispenserButtonPressed(index){
+        var webAppData = {
+          buttonIndex: index
+        }
+
+        var message = {
+            messageType: 'DRINK_DISPENSER_BUTTON_PRESSED',
+            roomCode: roomCode,
+            data: JSON.stringify(webAppData)
+        };
+
+        ws.send(JSON.stringify(message));
       }
 
     });

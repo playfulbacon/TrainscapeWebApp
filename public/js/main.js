@@ -226,8 +226,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
       }
 
       function setupBartenderBot(webAppSetup){
-        var drinkRecipe = webAppSetup.drinkRecipe;       
-        document.querySelector('#bot-content').innerHTML = drinkRecipe;
+        var drinkRecipes = webAppSetup.drinkRecipes;       
+        document.querySelector('#bot-content').innerHTML = drinkRecipes;
       }
 
       function setupGuardBot(webAppSetup){

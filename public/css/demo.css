@@ -22,6 +22,7 @@ body{
 .hackerid{
     font-family: "Orbitron", sans-serif;
     height: 50px;
+    font-size: 18px;
 }
 
 .connect-button{
@@ -63,5 +64,5 @@ p{
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
-  p { font-size: 30px;}
+  p { font-size: 25px;}
 }

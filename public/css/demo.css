@@ -16,6 +16,7 @@ body{
     height: 100%;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
 .hackerid{
@@ -35,7 +36,5 @@ p{
     font-family: 'VT323', monospace;
     color: chartreuse;
     font-size: 23px;
-    position: absolute;
-    top:36%;
-    left: 35%;
+    justify-content: center;
 }

@@ -112,7 +112,7 @@ p{
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
     p { font-size: 20px; margin-left: 15px; margin-right: 15px;}
-    .navigator{margin-top: -20px;}
+    #navigator{margin-top: -20px;}
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */

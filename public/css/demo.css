@@ -67,6 +67,22 @@ p{
     3px 3px 5px rgba(94, 104, 121, .288);
 }
 
+.grid-container {         
+  width: 260px;
+  padding: 20px;
+  background-color:#dde1e7;
+  margin: 0 auto;
+  position: relative;
+  border-radius: 15px;
+  box-shadow: 
+  -3px -3px 7px #ffffff73, 
+  3px 3px 5px rgba(94, 104, 121, .288);
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: 80px 80px 80px;
+  grid-template-rows: 80px 80px 80px;
+  }
+
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
         p { font-size: 20px; margin-left: 15px; margin-right: 15px;}

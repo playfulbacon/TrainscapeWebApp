@@ -60,7 +60,23 @@ p{
   outline: none;
 }
 
-.puzzle-button:active{
+.puzzle-button-nav{
+      width: 100px;
+  height: 100px;
+  margin: 10px;
+  float: left;
+  color: #92A1B8;
+  background-color: #dde1e7;
+  border-radius: 20%;
+  border: none;
+  box-shadow:
+    -3px -3px 7px #ffffff73, 
+    3px 3px 5px rgba(94, 104, 121, .288);
+  font-weight: 500;
+  outline: none;
+}
+
+.puzzle-button:active, puzzle-button-nav:active{
   font-size: 13px;
   box-shadow:inset
     -3px -3px 7px #ffffff73, inset

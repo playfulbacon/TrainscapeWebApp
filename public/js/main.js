@@ -4,6 +4,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
       const ws = new WebSocket(location.origin.replace(/^http/, 'ws'));
 
+      document.querySelector('#navigator').style.display = "none";
+
       ws.onopen = () => {
         console.log('Connection opened!');
       }
@@ -13,6 +15,17 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
         if (webAppMessage.roomCode.toLowerCase() == roomCode){
           showMessage(message.data);
+        }
+
+        if (webAppMessage.messageType == "JOINED_ROOM"){
+          fetch('/navigator.html')
+          .then((response) => {
+              return response.text();
+          })
+          .then((body) => {
+              document.querySelector('#connect').style.display = "none";
+              document.querySelector('#navigator').style.display = "block";
+          });
         }
 
         if (webAppMessage.messageType == "DOOR_PANEL_SETUP"){

@@ -77,12 +77,17 @@ wss.on('connection', (ws) => {
               client: ws
           });
           rooms.set(ws.room, players);
-          const response = {
+          const broadcastResponse = {
               messageType: 'PLAYER_JOINED',
               roomCode: ws.room,
           }
-          broadcastToRoom(ws.room, JSON.stringify(response));
-          //broadcast(JSON.stringify(response));
+          broadcastToRoom(ws.room, JSON.stringify(broadcastResponse));
+
+          const response = {
+            messageType: 'JOINED_ROOM',
+            roomCode: ws.room,
+          }
+          ws.send(JSON.stringify(response));
         }
     }
     break;

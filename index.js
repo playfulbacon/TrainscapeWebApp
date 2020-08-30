@@ -132,8 +132,9 @@ function broadcast(message) {
   });
 }
 
-setInterval(() => {
-  wss.clients.forEach((client) => {
-    //client.send(new Date().toTimeString());
+const interval = setInterval(function ping() {
+  wss.clients.forEach(function each(ws) {
+    console.log('ping');
+    ws.ping(noop);
   });
 }, 1000);

@@ -60,6 +60,13 @@ p{
   outline: none;
 }
 
+.puzzle-button:active{
+  font-size: 13px;
+  box-shadow:inset
+    -3px -3px 7px #ffffff73, inset
+    3px 3px 5px rgba(94, 104, 121, .288);
+}
+
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
         p { font-size: 20px; margin-left: 15px; margin-right: 15px;}

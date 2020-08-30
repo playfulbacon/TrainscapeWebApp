@@ -70,6 +70,7 @@ p{
 .grid-container {         
   width: 260px;
   padding: 20px;
+    padding-top: 50px;
   background-color:#dde1e7;
   margin: 0 auto;
   position: relative;
@@ -82,6 +83,15 @@ p{
   grid-template-columns: 80px 80px 80px;
   grid-template-rows: 80px 80px 80px;
   }
+
+.panel_title{
+    position: absolute;
+    left: 95px;
+    top: 5px;
+    font-family: 'VT323', monospace;
+    color: blueviolet;
+    font-size: 30px;
+}
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {

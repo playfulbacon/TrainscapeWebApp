@@ -97,6 +97,10 @@ p{
     
     font-family: "Courier New", Courier;
     font-size: 18px;
+    position:absolute;
+    top:325;
+    left: 400;
+    color: black;
 }
 
 

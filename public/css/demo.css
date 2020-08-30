@@ -9,6 +9,7 @@ body{
   width: 100%;
   left: 0;
   top: 0; 
+    overflow: hidden;
 }
 
 .connect{
@@ -44,25 +45,37 @@ p{
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
-    
+        body{background-color:crimson;} 
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
-  
+      body{background-color:brown;} 
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
-  
+    body{background-color:blue;} 
 } 
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
-  
+    body{background-color: aqua}
 } 
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
-  p { font-size: 30px;}
+  p { font-size: 20px;}
+    body{background-color: #3b0101}
+        
+}
+
+textarea,
+input.text,
+input[type="text"],
+input[type="button"],
+input[type="submit"],
+.input-checkbox {
+-webkit-appearance: none;
+border-radius: 0;
 }

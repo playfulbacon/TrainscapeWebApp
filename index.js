@@ -135,6 +135,6 @@ function broadcast(message) {
 const interval = setInterval(function ping() {
   wss.clients.forEach(function each(ws) {
     console.log('ping');
-    ws.ping(noop);
+    ws.ping(function noop(){});
   });
 }, 1000);

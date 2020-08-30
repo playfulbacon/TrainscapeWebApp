@@ -212,8 +212,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
         var answerSequence = webAppSetup.answerSequence;
         
         for(let i = 0; i < webAppSetup.buttonRows * webAppSetup.buttonCols; i++){
-          document.querySelector('#puzzle-button-' + i).addEventListener('click',function(){doorPanelButtonPressed(i)});
-          document.querySelector('#puzzle-button-' + i).innerHTML = webAppSetup.puzzleInputs[i].symbolIndex;
+          document.querySelector('#panel-button-' + i).addEventListener('click',function(){doorPanelButtonPressed(i)});
+          document.querySelector('#panel-button-' + i).innerHTML = webAppSetup.puzzleInputs[i].symbolIndex;
         }
 
         for(var i = 0; i < answerSequence.length; i++){
@@ -248,7 +248,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         document.querySelector('#drink-recipes').innerHTML = drinkRecipes;
 
         for(let i = 0; i < 6; i++){
-          document.querySelector('#puzzle-button-' + i).addEventListener('click',function(){drinkDispenserButtonPressed(i)});
+          document.querySelector('#drink-button-' + i).addEventListener('click',function(){drinkDispenserButtonPressed(i)});
         }
       }
 

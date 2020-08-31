@@ -98,6 +98,7 @@ p{
   grid-gap: 10px;
   grid-template-columns: 80px 80px 80px;
   grid-template-rows: 80px 80px 80px;
+     padding-bottom: 70px;
   }
 
 .panel_title{
@@ -122,6 +123,22 @@ p{
 
 .briefcase-container{
     width:936px;
+}
+
+.grid-container-door{
+    width: 260px;
+    padding: 20px;
+    padding-top: 90px;
+    background-color: #dde1e7;
+    margin: 0 auto;
+    position: relative;
+    border-radius: 15px;
+    box-shadow: -3px -3px 7px #ffffff73, 3px 3px 5px rgba(94, 104, 121, .288);
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 80px 80px 80px;
+    grid-template-rows: 80px 80px 80px;
+    padding-bottom: 70px;
 }
 
 

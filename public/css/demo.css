@@ -166,7 +166,7 @@ p{
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
     p { font-size: 20px; margin-left: 15px; margin-right: 15px;}
-    #train-ID{top: 365;}
+    #train-ID{top: 200; left: 190; font-size: 12px;}
     .train-img{max-width: 500px;}
     #back-button{left: 120;}
     #storage-box-input{left: 20; top: 250; position: absolute;}

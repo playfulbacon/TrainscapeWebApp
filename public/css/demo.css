@@ -152,7 +152,7 @@ p{
 #back-button{
     position: absolute; 
     left: 890px; 
-    top: 500px;
+    top: 0;
 }
 
 .drink-recipes{

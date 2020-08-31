@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
       document.querySelector('#machine-storage-box').style.display = "none";
       document.querySelector('#machine-drink-dispenser').style.display = "none";
       document.querySelector('#back-button').style.display = "none";
+      document.querySelector('#waiting-for-start').style.display = "none";
 
       ws.onopen = () => {
         console.log('Connection opened!');
@@ -24,13 +25,18 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
         if (webAppMessage.messageType == "JOINED_ROOM"){
           document.querySelector('#connect').style.display = "none";
-          document.querySelector('#navigator').style.display = "block";
+          document.querySelector('#waiting-for-start').style.display = "block";
 
           var message = {
             messageType: 'WEB_APP_PLAYER_JOINED',
             roomCode: roomCode,
           };
           ws.send(JSON.stringify(message));
+        }
+
+        if (webAppMessage.messageType == "MISSION_STARTED"){
+          document.querySelector('#waiting-for-start').style.display = "none";
+          document.querySelector('#navigator').style.display = "block";
         }
 
         if (webAppMessage.messageType == "DOOR_PANEL_SETUP"){
@@ -103,13 +109,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
         document.querySelector('#machine-door-panel').style.display = "block";
         document.querySelector('#back-button').style.display = "block";
         currentPageId = '#machine-door-panel';
-
-        var test = {
-          messageType: 'REQUEST_DOOR_PANEL_SETUP',
-          roomCode: roomCode,
-        };
-
-        ws.send(JSON.stringify(test));
       });
 
       machineStorageBoxButton.addEventListener('click', function(){
@@ -118,13 +117,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
         document.querySelector('#machine-storage-box').style.display = "block";
         document.querySelector('#back-button').style.display = "block";
         currentPageId = '#machine-storage-box';
-
-        var test = {
-          messageType: 'REQUEST_STORAGE_BOX_SETUP',
-          roomCode: roomCode,
-        };
-
-        ws.send(JSON.stringify(test));
       });
 
       machineDrinkDispenserButton.addEventListener('click', function(){
@@ -133,48 +125,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
         document.querySelector('#machine-drink-dispenser').style.display = "block";
         document.querySelector('#back-button').style.display = "block";
         currentPageId = '#machine-drink-dispenser';
-
-        var test = {
-          messageType: 'REQUEST_DRINK_DISPENSER_SETUP',
-          roomCode: roomCode,
-        };
-
-        ws.send(JSON.stringify(test));
-      });
-
-      botBartenderButton.addEventListener('click', function(){
-        fetch('/bot.html')
-          .then((response) => {
-              return response.text();
-          })
-          .then((body) => {
-              document.querySelector('#game-content').innerHTML = body;
-              
-              var test = {
-                messageType: 'REQUEST_BARTENDER_BOT_SETUP',
-                roomCode: roomCode,
-              };
-      
-              ws.send(JSON.stringify(test));
-          });
-      });
-
-      
-      botGuardButton.addEventListener('click', function(){
-        fetch('/bot.html')
-          .then((response) => {
-              return response.text();
-          })
-          .then((body) => {
-              document.querySelector('#game-content').innerHTML = body;
-              
-              var test = {
-                messageType: 'REQUEST_GUARD_BOT_SETUP',
-                roomCode: roomCode,
-              };
-      
-              ws.send(JSON.stringify(test));
-          });
       });
 
       testCssBtn.addEventListener('click', function(){
@@ -225,7 +175,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
       function setupStorageBox(webAppSetup){
         
-        var trainID = "Train ID: " + webAppSetup.trainID;
+        var trainID = "Train Number: " + webAppSetup.trainID;
         document.querySelector('#train-ID').innerHTML = trainID;
         document.querySelector('#storage-box-button').addEventListener('click',function()
         {

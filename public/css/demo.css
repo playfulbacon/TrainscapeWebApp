@@ -141,6 +141,11 @@ p{
     padding-bottom: 70px;
 }
 
+.door-panel-answer{
+    position: absolute;
+    top: 50;
+    left: 120;
+}
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {

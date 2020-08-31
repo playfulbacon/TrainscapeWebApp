@@ -158,8 +158,9 @@ p{
 }
 
 .drink-recipes{
-        position: absolute;
-    top: 560;
+    font-size: 15px;
+    position: absolute;
+    top: 550;
     left: 0;
     
 }
@@ -172,6 +173,7 @@ p{
     #storage-box-input{left: 20; top: 250; position: absolute;}
     #storage-box-button{position: absolute; left: 280; top: 230}
     .briefcase-container{width: 500px;}
+    .drink-recipes{top:430;}
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */

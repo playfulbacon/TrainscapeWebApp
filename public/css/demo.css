@@ -151,6 +151,7 @@ p{
 @media only screen and (max-width: 600px) {
     p { font-size: 20px; margin-left: 15px; margin-right: 15px;}
     #train-ID{top: 365;}
+    .train-img{max-width: 600px;}
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */

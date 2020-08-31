@@ -122,8 +122,7 @@ p{
 
 .briefcase-container{
   padding: 20px;
-  padding-top: 50px;
-    width: 939px;
+  width: 939px;
   margin: 0 auto;
   position: relative;
 }
@@ -151,7 +150,6 @@ p{
 }
 
 #back-button{
-    margin-top: 20px; 
     position: absolute; 
     left: 890px; 
     top: 500px;
@@ -160,7 +158,7 @@ p{
 .drink-recipes{
     font-size: 15px;
     position: absolute;
-    top: 550;
+    top: 350;
     left: 0;
     
 }
@@ -173,7 +171,7 @@ p{
     #storage-box-input{left: 20; top: 250; position: absolute;}
     #storage-box-button{position: absolute; left: 280; top: 230}
     .briefcase-container{width: 500px;}
-    .drink-recipes{top:460;}
+    .drink-recipes{top:350;}
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */

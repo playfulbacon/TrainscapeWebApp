@@ -169,11 +169,11 @@ p{
     p { font-size: 20px; margin-left: 15px; margin-right: 15px;}
     #train-ID{top: 200; left: 190; font-size: 12px;}
     .train-img{max-width: 500px;}
-    #back-button{left: 120; top:350;}
+    #back-button{left: 120; top:420;}
     #storage-box-input{left: 20; top: 250; position: absolute;}
     #storage-box-button{position: absolute; left: 280; top: 230}
     .briefcase-container{width: 500px;}
-    .drink-recipes{top:430;}
+    .drink-recipes{top:460;}
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */

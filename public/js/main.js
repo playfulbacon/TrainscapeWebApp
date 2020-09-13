@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
       var roomCode = '';
       var currentPageId = '';
+      var currentPuzzleId = '';
 
       const ws = new WebSocket(location.origin.replace(/^http/, 'ws'));
 
@@ -78,6 +79,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
         document.querySelector('#navigator').style.display = "block";
         document.querySelector(currentPageId).style.display = "none";
         document.querySelector('#back-button').style.display = "none";
+
+        ws.send(JSON.stringify({messageType: currentPuzzleId + '_DESELECTED', roomCode: roomCode}));
       });
 
       connectBtn.addEventListener('click', function(){
@@ -109,6 +112,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
         document.querySelector('#machine-door-panel').style.display = "block";
         document.querySelector('#back-button').style.display = "block";
         currentPageId = '#machine-door-panel';
+
+        currentPuzzleId = 'DOOR_PANEL';
+        ws.send(JSON.stringify({messageType: currentPuzzleId + '_SELECTED', roomCode: roomCode}));
       });
 
       machineStorageBoxButton.addEventListener('click', function(){
@@ -117,6 +123,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
         document.querySelector('#machine-storage-box').style.display = "block";
         document.querySelector('#back-button').style.display = "block";
         currentPageId = '#machine-storage-box';
+
+        currentPuzzleId = 'STORAGE_BOX';
+        ws.send(JSON.stringify({messageType: currentPuzzleId + '_SELECTED', roomCode: roomCode}));
       });
 
       machineDrinkDispenserButton.addEventListener('click', function(){
@@ -125,6 +134,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
         document.querySelector('#machine-drink-dispenser').style.display = "block";
         document.querySelector('#back-button').style.display = "block";
         currentPageId = '#machine-drink-dispenser';
+
+        currentPuzzleId = 'DRINK_DISPENSER';
+        ws.send(JSON.stringify({messageType: currentPuzzleId + '_SELECTED', roomCode: roomCode}));
       });
 
       testCssBtn.addEventListener('click', function(){
@@ -149,7 +161,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         }
 
         var message = {
-            messageType: 'DOOR_PANEL_BUTTON_PRESSED',
+            messageType: 'DOOR_PANEL_DATA',
             roomCode: roomCode,
             data: JSON.stringify(webAppData)
         };
@@ -184,7 +196,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
           }
   
           var message = {
-              messageType: 'STORAGE_BOX_INPUT',
+              messageType: 'STORAGE_BOX_DATA',
               roomCode: roomCode,
               data: JSON.stringify(webAppData)
           };
@@ -222,7 +234,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         }
 
         var message = {
-            messageType: 'DRINK_DISPENSER_BUTTON_PRESSED',
+            messageType: 'DRINK_DISPENSER_DATA',
             roomCode: roomCode,
             data: JSON.stringify(webAppData)
         };

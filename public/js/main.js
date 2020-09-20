@@ -39,28 +39,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
           document.querySelector('#waiting-for-start').style.display = "none";
           document.querySelector('#navigator').style.display = "block";
         }
-
-        if (webAppMessage.messageType == "DOOR_PANEL_SETUP"){
-          setupDoorPanel(JSON.parse(webAppMessage.data));
-        }
-
-        /*
-        if (webAppMessage.messageType == "STORAGE_BOX_SETUP"){
-          setupStorageBox(JSON.parse(webAppMessage.data));
-        }
-        */
-
-        if (webAppMessage.messageType == "DRINK_DISPENSER_SETUP"){
-          setupDrinkDispenser(JSON.parse(webAppMessage.data));
-        }
-
-        if (webAppMessage.messageType == "BARTENDER_BOT_SETUP"){
-          setupBartenderBot(JSON.parse(webAppMessage.data));
-        }
-
-        if (webAppMessage.messageType == "GUARD_BOT_SETUP"){
-          setupGuardBot(JSON.parse(webAppMessage.data));
-        }
       });
 
       ws.addEventListener('close', function(event){
@@ -70,12 +48,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
       const connectBtn = document.querySelector('#connect-button');
       const testBtn = document.querySelector('#test-button');
       const messages = document.querySelector('#messages');
+
+      //TODO: dynamically create these buttons and add click event listeners in puzzle.js
       const machineDoorPanelButton = document.querySelector('#machine-door-panel-button');
       const machineStorageBoxButton = document.querySelector('#machine-storage-box-button');
       const machineDrinkDispenserButton = document.querySelector('#machine-drink-dispenser-button');
-      const botGuardButton = document.querySelector('#bot-guard-button');
-      const botBartenderButton = document.querySelector('#bot-bartender-button');
-      const testCssBtn = document.querySelector('#test-css-button');
 
       document.querySelector('#back-button').addEventListener('click', function(){
         document.querySelector('#navigator').style.display = "block";
@@ -108,6 +85,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         ws.send(JSON.stringify(test));
       });
 
+      // TODO: create selectPuzzle function, hook up to dynamically created buttons from puzzle.js
       machineDoorPanelButton.addEventListener('click', function(){
 
         document.querySelector('#navigator').style.display = "none";
@@ -145,92 +123,4 @@ document.addEventListener("DOMContentLoaded", function(event) {
         messages.textContent = message + "\n\n" + messages.textContent;
         messages.scrollTop = messages.scrollHeight;
       }
-
-      function doorPanelButtonPressed(index){
-        var webAppData = {
-          buttonIndex: index
-        }
-
-        var message = {
-            messageType: 'DOOR_PANEL_DATA',
-            roomCode: roomCode,
-            data: JSON.stringify(webAppData)
-        };
-
-        ws.send(JSON.stringify(message));
-      }
-
-      function setupDoorPanel(webAppSetup){
-        
-        var answerSequence = webAppSetup.answerSequence;
-        
-        for(let i = 0; i < webAppSetup.buttonRows * webAppSetup.buttonCols; i++){
-          document.querySelector('#panel-button-' + i).addEventListener('click',function(){doorPanelButtonPressed(i)});
-          document.querySelector('#panel-button-' + i).innerHTML = webAppSetup.puzzleInputs[i].symbolIndex;
-        }
-
-        for(var i = 0; i < answerSequence.length; i++){
-          document.querySelector('#answer-' + i).innerHTML = answerSequence[i].symbolIndex;
-          document.querySelector('#answer-' + i).style.color = "#" + webAppSetup.colors[answerSequence[i].colorIndex];
-        }
-
-      }
-
-      function setupStorageBox(webAppSetup){
-        
-        var trainID = "Train Number: " + webAppSetup.trainID;
-        document.querySelector('#train-ID').innerHTML = trainID;
-        document.querySelector('#storage-box-button').addEventListener('click',function()
-        {
-          var webAppData = {
-            code: document.querySelector('#storage-box-input').value.toLowerCase()
-          }
-  
-          var message = {
-              messageType: 'STORAGE_BOX_DATA',
-              roomCode: roomCode,
-              data: JSON.stringify(webAppData)
-          };
-  
-          ws.send(JSON.stringify(message));
-        });
-      }
-
-      function setupDrinkDispenser(webAppSetup){    
-        var drinkRecipes = webAppSetup.drinkRecipes;       
-        document.querySelector('#drink-recipes').innerHTML = drinkRecipes;
-
-        for(let i = 0; i < 6; i++){
-          document.querySelector('#drink-button-' + i).addEventListener('click',function(){drinkDispenserButtonPressed(i)});
-        }
-      }
-
-      function setupBartenderBot(webAppSetup){
-        var drinkRecipes = webAppSetup.drinkRecipes;       
-        document.querySelector('#drink-recipes').innerHTML = drinkRecipes;
-      }
-
-      function setupGuardBot(webAppSetup){
-        var answerSequence = webAppSetup.answerSequence;
-
-        for(var i = 0; i < answerSequence.length; i++){
-          document.querySelector('#answer-' + i).innerHTML = answerSequence[i].symbolIndex;
-          document.querySelector('#answer-' + i).style.color = "#" + webAppSetup.colors[answerSequence[i].colorIndex];
-        }
-      }
-
-      function drinkDispenserButtonPressed(index){
-        var webAppData = {
-          buttonIndex: index
-        }
-
-        var message = {
-            messageType: 'DRINK_DISPENSER_DATA',
-            roomCode: roomCode,
-            data: JSON.stringify(webAppData)
-        };
-
-        ws.send(JSON.stringify(message));
-      }
-
     });

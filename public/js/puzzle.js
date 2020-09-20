@@ -11,6 +11,8 @@ class Puzzle{
         setupCallback(webAppSetup);
       }
     });    
+
+    //TODO: add button to html that represents puzzle with naming convention using puzzleId
   }
 
   sendData = function(data){

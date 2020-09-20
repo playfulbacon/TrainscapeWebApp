@@ -1,8 +1,8 @@
-var puzzle = new Puzzle("STORAGE_BOX", function (webAppSetup) {
-    setup(webAppSetup);
+var storageBoxPuzzle = new Puzzle("STORAGE_BOX", function (webAppSetup) {
+    storageBoxSetup(webAppSetup);
 });
 
-function setup(webAppSetup){
+function storageBoxSetup(webAppSetup){
     var trainID = "Train Number: " + webAppSetup.trainID;
     document.querySelector('#train-ID').innerHTML = trainID;
     document.querySelector('#storage-box-button').addEventListener('click',function()
@@ -11,7 +11,7 @@ function setup(webAppSetup){
             code: document.querySelector('#storage-box-input').value.toLowerCase()
         }
 
-        puzzle.sendData(webAppData);
+        storageBoxPuzzle.sendData(webAppData);
     });
 }
 

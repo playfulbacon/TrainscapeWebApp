@@ -1,10 +1,7 @@
-document.addEventListener("DOMContentLoaded", function(event) {
+document.addEventListener("DOMContentLoaded", function(event) {     
 
-      var roomCode = '';
       var currentPageId = '';
       var currentPuzzleId = '';
-
-      const ws = new WebSocket(location.origin.replace(/^http/, 'ws'));
 
       document.querySelector('#navigator').style.display = "none";
       document.querySelector('#machine-door-panel').style.display = "none";
@@ -13,11 +10,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
       document.querySelector('#back-button').style.display = "none";
       document.querySelector('#waiting-for-start').style.display = "none";
 
-      ws.onopen = () => {
+      ws.addEventListener('open', function(event){
         console.log('Connection opened!');
-      }
+      });
 
-      ws.onmessage = (message) => {
+      ws.addEventListener('message', function(message){
+        console.log('message received');
+
         var webAppMessage = JSON.parse(message.data);
 
         if (webAppMessage.roomCode.toLowerCase() == roomCode){
@@ -25,6 +24,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         }
 
         if (webAppMessage.messageType == "JOINED_ROOM"){
+          
           document.querySelector('#connect').style.display = "none";
           document.querySelector('#waiting-for-start').style.display = "block";
 
@@ -44,9 +44,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
           setupDoorPanel(JSON.parse(webAppMessage.data));
         }
 
+        /*
         if (webAppMessage.messageType == "STORAGE_BOX_SETUP"){
           setupStorageBox(JSON.parse(webAppMessage.data));
         }
+        */
 
         if (webAppMessage.messageType == "DRINK_DISPENSER_SETUP"){
           setupDrinkDispenser(JSON.parse(webAppMessage.data));
@@ -59,11 +61,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
         if (webAppMessage.messageType == "GUARD_BOT_SETUP"){
           setupGuardBot(JSON.parse(webAppMessage.data));
         }
-      }
+      });
 
-      ws.onclose = function () {
+      ws.addEventListener('close', function(event){
         ws = null;
-      }
+      });
 
       const connectBtn = document.querySelector('#connect-button');
       const testBtn = document.querySelector('#test-button');
@@ -137,17 +139,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
         currentPuzzleId = 'DRINK_DISPENSER';
         ws.send(JSON.stringify({messageType: currentPuzzleId + '_SELECTED', roomCode: roomCode}));
-      });
-
-      testCssBtn.addEventListener('click', function(){
-
-        fetch('/cssTest.html')
-          .then((response) => {
-              return response.text();
-          })
-          .then((body) => {
-              document.querySelector('#game-content').innerHTML = body;
-          });
       });
 
       function showMessage(message) {

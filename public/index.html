@@ -87,6 +87,16 @@
 
   </body>
 
-  <script type="application/javascript" src="js/main.js"></script>
+  <!-- global variables -->
+  <script>      
+  var ws = new WebSocket(location.origin.replace(/^http/, 'ws'));
+  var roomCode = '';
+  </script>
+
+  <script src="js/puzzle.js"></script>
+
+  <script src="js/main.js"></script>
+
+  <script src="js/puzzle-storage-box.js"></script>
 
 </html>

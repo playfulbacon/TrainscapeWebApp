@@ -95,10 +95,8 @@ wss.on('connection', (ws) => {
     default: {
       broadcastToRoom(ws.room, message);
     }
-    break;
-    
+    break;    
     }
-
   })
 });
 

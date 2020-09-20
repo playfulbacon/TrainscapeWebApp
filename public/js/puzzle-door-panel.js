@@ -1,9 +1,4 @@
 var doorPanelPuzzle = new Puzzle("DOOR_PANEL", function (webAppSetup) {
-    doorPanelSetup(webAppSetup);
-});
-
-function doorPanelSetup(webAppSetup){
-        
     for(let i = 0; i < webAppSetup.buttonRows * webAppSetup.buttonCols; i++){
         document.querySelector('#panel-button-' + i).addEventListener('click',function()
         {
@@ -23,4 +18,4 @@ function doorPanelSetup(webAppSetup){
       document.querySelector('#answer-' + i).innerHTML = answerSequence[i].symbolIndex;
       document.querySelector('#answer-' + i).style.color = "#" + webAppSetup.colors[answerSequence[i].colorIndex];
     }
-}
+});

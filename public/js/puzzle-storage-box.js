@@ -1,8 +1,4 @@
 var storageBoxPuzzle = new Puzzle("STORAGE_BOX", function (webAppSetup) {
-    storageBoxSetup(webAppSetup);
-});
-
-function storageBoxSetup(webAppSetup){
     var trainID = "Train Number: " + webAppSetup.trainID;
     document.querySelector('#train-ID').innerHTML = trainID;
     document.querySelector('#storage-box-button').addEventListener('click',function()
@@ -11,9 +7,11 @@ function storageBoxSetup(webAppSetup){
             code: document.querySelector('#storage-box-input').value.toLowerCase()
         }
 
+        document.querySelector('#storage-box-input').value = "";
+
         storageBoxPuzzle.sendData(webAppData);
     });
-}
+});
 
 /*
 fetch('/cssTest.html')

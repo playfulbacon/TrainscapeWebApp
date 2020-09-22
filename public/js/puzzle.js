@@ -13,6 +13,9 @@ class Puzzle{
     });    
 
     //TODO: add button to html that represents puzzle with naming convention using puzzleId
+
+    //TODO: add puzzle to dictionary that uses id as a key, use dictionary to show / hide puzzles on mission setup
+    puzzles.set(puzzleId, this);
   }
 
   sendData = function(data){

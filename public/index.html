@@ -87,20 +87,23 @@
 
   </body>
 
-  <!-- global variables -->
-  <script>      
+  <script>     
+   
   var ws = new WebSocket(location.origin.replace(/^http/, 'ws'));
-  var roomCode = '';
+  var puzzles = new Map();
+
   </script>
 
   <script src="js/puzzle.js"></script>
 
-  <script src="js/main.js"></script>
 
   <script src="js/puzzle-storage-box.js"></script>
 
   <script src="js/puzzle-drink-dispenser.js"></script>
 
   <script src="js/puzzle-door-panel.js"></script>
+
+
+  <script src="js/main.js"></script>
 
 </html>

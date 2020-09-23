@@ -1,4 +1,4 @@
-var doorPanelPuzzle = new Puzzle("DOOR_PANEL", function (webAppSetup) {
+var doorPanelPuzzle = new Puzzle("DOOR_PANEL", "./html/puzzle-door-panel.html", function (webAppSetup) {
     for(let i = 0; i < webAppSetup.buttonRows * webAppSetup.buttonCols; i++){
         document.querySelector('#panel-button-' + i).addEventListener('click',function()
         {

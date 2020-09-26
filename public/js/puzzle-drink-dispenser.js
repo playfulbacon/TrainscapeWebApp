@@ -1,4 +1,6 @@
-var drinkDispenserPuzzle = new Puzzle("DRINK_DISPENSER", "./html/puzzle-drink-dispenser.html", function (webAppSetup) {
+var drinkDispenserPuzzle = new Puzzle("DRINK_DISPENSER", "./html/puzzle-drink-dispenser.html", 
+
+    function (webAppSetup) {
     var drinkRecipes = webAppSetup.drinkRecipes;       
     document.querySelector('#drink-recipes').innerHTML = drinkRecipes;
 
@@ -12,4 +14,7 @@ var drinkDispenserPuzzle = new Puzzle("DRINK_DISPENSER", "./html/puzzle-drink-di
             drinkDispenserPuzzle.sendData(webAppData);
         });
     }
-});
+    },
+
+    function(){}
+);

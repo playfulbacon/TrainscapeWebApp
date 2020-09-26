@@ -1,14 +1,19 @@
 class Puzzle{
   
-  constructor(puzzleId, htmlPath, setupCallback){
+  constructor(puzzleId, htmlPath, setupCallback, responseCallback){
 
     this.puzzleId = puzzleId;
+    this.solved = false;
 
     ws.addEventListener('message', function(event){
       var webAppMessage = JSON.parse(event.data);
       if (webAppMessage.messageType == puzzleId + "_SETUP"){
         var webAppSetup = JSON.parse(webAppMessage.data);
         setupCallback(webAppSetup);
+      }
+      if (webAppMessage.messageType == puzzleId + "_RESPONSE"){
+        var webAppResponse = JSON.parse(webAppMessage.data);
+        responseCallback(webAppResponse);
       }
     });    
 
@@ -33,7 +38,7 @@ class Puzzle{
         document.querySelector('#navigator').appendChild(btn);
 
         btn.addEventListener('click', function(){
-          selectPuzzle(puzzleId);
+          selectPuzzle(puzzleId); //index.html function
         });
     });
 
@@ -52,13 +57,3 @@ class Puzzle{
     ws.send(JSON.stringify(webAppMessage));
   }
 }
-
-/*
-fetch('/cssTest.html')
-    .then((response) => {
-        return response.text();
-    })
-    .then((body) => {
-        document.querySelector('#game-content').innerHTML = body;
-    });
-*/

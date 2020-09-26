@@ -18,7 +18,7 @@
       <div class="panel_title">MAIN MENU</div>
     </div>
 
-    <div><button class="connect-button" id="back-button">BACK</button></div>
+    <div><button id="back-button">&lt; BACK</button></div>
 
     <div class="connect" id="waiting-for-start">
       <div><p>Connected!<br><br> Waiting for your agent to start the game...</p></div>
@@ -45,6 +45,12 @@
     currentPuzzleId = puzzleId;
 
     ws.send(JSON.stringify({messageType: currentPuzzleId + '_SELECTED'}));
+
+    //TODO: set solved color and text based on current puzzle's solved
+  }
+
+  function solvePuzzle(puzzleId){
+    puzzles.get(puzzleId).solved = true;
   }
 
   </script>

@@ -1,4 +1,6 @@
-var storageBoxPuzzle = new Puzzle("STORAGE_BOX", "./html/puzzle-storage-box.html", function (webAppSetup) {
+var storageBoxPuzzle = new Puzzle("STORAGE_BOX", "./html/puzzle-storage-box.html", 
+
+    function (webAppSetup) {
     var trainID = "Train Number: " + webAppSetup.trainID;
     document.querySelector('#train-ID').innerHTML = trainID;
     document.querySelector('#storage-box-button').addEventListener('click',function()
@@ -11,4 +13,9 @@ var storageBoxPuzzle = new Puzzle("STORAGE_BOX", "./html/puzzle-storage-box.html
 
         storageBoxPuzzle.sendData(webAppData);
     });
-});
+    },
+
+    function(webAppResponse){
+        console.log("isCorrect " + webAppResponse.isCorrect);
+    }
+);

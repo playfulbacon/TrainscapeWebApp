@@ -4,7 +4,7 @@ var templatePuzzle = new Puzzle("TEMPLATE_PUZZLE", "./html/template-puzzle.html"
         //templatePuzzle.sendData(webAppData);
     },
 
-    function(){
+    function(webAppResponse){
 
     }
 );

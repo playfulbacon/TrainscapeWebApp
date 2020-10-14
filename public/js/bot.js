@@ -8,7 +8,6 @@ class Bot{
             var webAppMessage = JSON.parse(event.data);
             if (webAppMessage.messageType == puzzleId + "_SETUP"){
               var webAppSetup = JSON.parse(webAppMessage.data);
-              print("Bot Setup: " + webAppSetup);
               this.botInfo = webAppSetup.botInfo;
             }
         });  

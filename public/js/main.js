@@ -35,10 +35,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
       document.querySelector('#back-button').addEventListener('click', function(){
         document.querySelector('#navigator').style.display = "block";
-        document.querySelector('#' + currentPuzzleId).style.display = "none";
+        document.querySelector('#' + currentHackableId).style.display = "none";
         document.querySelector('#back-button').style.display = "none";
 
-        ws.send(JSON.stringify({messageType: currentPuzzleId + '_DESELECTED'}));
+        ws.send(JSON.stringify({messageType: currentHackableId + '_DESELECTED'}));
       });
 
       document.querySelector('#connect-button').addEventListener('click', function(){

@@ -4,7 +4,7 @@ var puzzleExample = new Puzzle("PUZZLE_EXAMPLE", "./html/puzzle-example.html",
         //puzzleExample.sendData(webAppData);
         document.querySelector('#example-correct-color').innerHTML = webAppSetup.correctColor;
 
-        document.querySelector('#example-button-right').addEventListener('click', function()
+        document.querySelector('#example-button-right').addEventListener('click', () =>
         {
             var webAppData = {
                 isMovingRight: true
@@ -13,7 +13,7 @@ var puzzleExample = new Puzzle("PUZZLE_EXAMPLE", "./html/puzzle-example.html",
             puzzleExample.sendData(webAppData);
         });
 
-        document.querySelector('#example-button-left').addEventListener('click', function()
+        document.querySelector('#example-button-left').addEventListener('click', () =>
         {
             var webAppData = {
                 isMovingRight: false

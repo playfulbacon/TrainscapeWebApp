@@ -3,7 +3,6 @@ class Puzzle{
   constructor(puzzleId, htmlPath, setupCallback, responseCallback){
 
     this.puzzleId = puzzleId;
-    this.solved = false;
 
     ws.addEventListener('message', function(event){
       var webAppMessage = JSON.parse(event.data);
@@ -30,13 +29,8 @@ class Puzzle{
         div.style.display = "none";
         document.querySelector('#game-content').appendChild(div);
 
-        // navigator button
-        var btn = document.createElement("BUTTON");
-        btn.setAttribute('id', puzzleId + "-button");
-        btn.setAttribute('class', "puzzle-button-nav");
-        btn.innerHTML = puzzleId;
-        document.querySelector('#navigator').appendChild(btn);
-
+        // navigation button
+        var btn = newNavigatorButton(puzzleId);
         btn.addEventListener('click', function(){
           selectPuzzle(puzzleId); //index.html function
         });

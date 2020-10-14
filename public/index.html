@@ -33,30 +33,36 @@
   <script>     
   var ws = new WebSocket(location.origin.replace(/^http/, 'ws'));
   var puzzles = new Map();
-  var currentPuzzleId = '';
+  var currentHackableId;
 
-  function selectPuzzle(puzzleId){
-    console.log('select puzzle: ' + puzzleId);
+  function selectHackable(id){
+    console.log('select hackable: ' + id);
 
     document.querySelector('#navigator').style.display = "none";
-    document.querySelector('#' + puzzleId).style.display = "block";
+    document.querySelector('#' + id).style.display = "block";
     document.querySelector('#back-button').style.display = "block";
 
-    currentPuzzleId = puzzleId;
-
-    ws.send(JSON.stringify({messageType: currentPuzzleId + '_SELECTED'}));
-
-    //TODO: set solved color and text based on current puzzle's solved
+    currentHackableId = id;
   }
 
-  function solvePuzzle(puzzleId){
-    puzzles.get(puzzleId).solved = true;
+  function selectPuzzle(puzzleId){
+    selectHackable(puzzleId);
+    ws.send(JSON.stringify({messageType: puzzleId + '_SELECTED'}));
+  }
+
+  function newNavigatorButton(id){
+    var btn = document.createElement("BUTTON");
+    btn.setAttribute('id', id + "-navigator-button");
+    btn.setAttribute('class', "puzzle-button-nav");
+    btn.innerHTML = id;
+    document.querySelector('#navigator').appendChild(btn);
+    return btn;
   }
 
   </script>
 
   <script src="js/puzzle.js"></script>
-  
+
   <script src="js/bot.js"></script>
   <script src="js/bot-setup.js"></script>
 

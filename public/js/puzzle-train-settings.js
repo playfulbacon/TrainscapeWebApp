@@ -52,7 +52,7 @@ var puzzleTrainSettings = new Puzzle("PUZZLE_TRAINSETTINGS", "./html/puzzle-trai
         });
         document.querySelector('#button-music-track').addEventListener('click', function()
         {
-            document.querySelector('#button-music-toggle').innerHTML = "PLAY";
+            document.querySelector('#button-music-toggle').innerHTML = "STOP";
 
             var webAppData = {
                 cabinDoorUpdate: false,

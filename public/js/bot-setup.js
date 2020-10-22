@@ -8,6 +8,19 @@ fetch("./html/bot.html")
     div.innerHTML = body;
     div.style.display = "none";
     document.querySelector('#game-content').appendChild(div);
+
+    //folder structure setup
+    var collapsibles = document.getElementsByClassName("collapsible");
+    for (var i = 0; i < collapsibles.length; i++) {
+        collapsibles[i].addEventListener("click", function () {
+            var content = this.nextElementSibling;
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
+        });
+    }
 });
 
 var owen = new Bot("BOT_OWEN");

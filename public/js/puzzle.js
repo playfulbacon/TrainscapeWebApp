@@ -1,6 +1,6 @@
 class Puzzle{
   
-  constructor(puzzleId, htmlPath, setupCallback, responseCallback){
+  constructor(puzzleId, htmlPath, setupCallback, responseCallback = {}, inputCallback = {}){
 
     this.puzzleId = puzzleId;
 
@@ -13,6 +13,10 @@ class Puzzle{
       if (webAppMessage.messageType == puzzleId + "_RESPONSE"){
         var webAppResponse = JSON.parse(webAppMessage.data);
         responseCallback(webAppResponse);
+      }
+      if (webAppMessage.messageType == puzzleId + "_INPUT"){
+        var webAppInput = JSON.parse(webAppMessage.data);
+        inputCallback(webAppInput);
       }
     });    
 

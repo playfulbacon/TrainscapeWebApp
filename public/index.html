@@ -11,20 +11,21 @@
     <div class="connect" id="connect">
       <div class="message"><p>Welcome Hacker,<br> Please enter your Hacker ID to connect with your agent.</p></div>
       <input class="hackerid" type="text" id="room-code-input" placeholder="HACKER ID" maxlength="4" style="text-transform:uppercase" />
-      <button class="connect-button" id="connect-button">CONNECT</button>
+      <button id="connect-button" style="margin-top:20px;">CONNECT</button>
     </div>
    
-    <div class="grid-container" id="navigator" style="margin-top: 90px; height: 300px; padding-bottom:-70px;">
-      <div class="panel_title">MAIN MENU</div>
-    </div>
-
-    <div><button id="back-button">&lt; BACK</button></div>
-
     <div class="connect" id="waiting-for-start">
       <div><p>Connected!<br><br> Waiting for your agent to start the game...</p></div>
     </div>
 
-    <div id="game-content" style="margin-top:90px;"></div>
+    <button id="back-button" style="margin-top: 20px;">&lt; BACK</button>
+
+    <div id="parent" style="margin-top: 20px;">
+      <div class="navigator" id="navigator">
+        <h1>HACKABLE OBJECTS</h1>
+      </div>
+      <div id="game-content"></div>
+    </div>
 
     <pre id="messages" style="margin-top:20px;" hidden></pre>
 
@@ -53,7 +54,7 @@
   function newNavigatorButton(id){
     var btn = document.createElement("BUTTON");
     btn.setAttribute('id', id + "-navigator-button");
-    btn.setAttribute('class', "puzzle-button-nav");
+    //btn.setAttribute('class', "puzzle-button-nav");
     btn.innerHTML = id;
     document.querySelector('#navigator').appendChild(btn);
     return btn;

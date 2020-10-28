@@ -1,0 +1,53 @@
+body {
+  position: fixed;
+  width: 75%;
+  left: 50%;
+  transform: translate(-50%);
+
+  margin-top: 20px;
+  padding: 0;
+
+  text-align: center;
+}
+
+table{
+  margin-left: auto;
+  margin-right: auto;
+  border-spacing: 20px;
+  border: 1px dotted black;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+input{
+  border-radius: 8px;
+  padding: 10px;
+}
+
+button{
+  cursor: pointer;
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  padding: 10px;
+  color: white;
+  background-color: black;
+}
+
+.navigator button{
+  margin-bottom: 20px;
+  padding: 18px;
+  width: 100%;
+  text-align: left;
+}
+
+/* Style the button that is used to open and close the collapsible content */
+.collapsible {
+  padding: 18px;
+  width: 100%;
+  text-align: left;
+}
+
+.content{
+  text-align: left;
+}

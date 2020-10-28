@@ -2,7 +2,7 @@
 
   <head>
   <title>Trainscape</title>
-  <link rel="stylesheet" href="css/demo.css"/>
+  <link rel="stylesheet" href="css/simple.css"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
 
@@ -10,24 +10,27 @@
   
     <div class="connect" id="connect">
       <div class="message"><p>Welcome Hacker,<br> Please enter your Hacker ID to connect with your agent.</p></div>
+      
+      <div style="margin-top:20px;">
       <input class="hackerid" type="text" id="room-code-input" placeholder="HACKER ID" maxlength="4" style="text-transform:uppercase" />
-      <button id="connect-button" style="margin-top:20px;">CONNECT</button>
+      <button id="connect-button">CONNECT</button>
+      </div>
     </div>
    
     <div class="connect" id="waiting-for-start">
       <div><p>Connected!<br><br> Waiting for your agent to start the game...</p></div>
     </div>
 
-    <button id="back-button" style="margin-top: 20px;">&lt; BACK</button>
+    <button id="back-button">&lt; BACK</button>
 
-    <div id="parent" style="margin-top: 20px;">
+    <div id="parent">
       <div class="navigator" id="navigator">
         <h1>HACKABLE OBJECTS</h1>
       </div>
       <div id="game-content"></div>
     </div>
 
-    <pre id="messages" style="margin-top:20px;" hidden></pre>
+    <pre id="messages" hidden></pre>
 
   </body>
 
@@ -76,7 +79,6 @@
   <script src="js/info-passengers-list.js"></script>
   <script src="js/puzzle-train-settings.js"></script>
   <script src="js/puzzle-luggage-combo-lock.js"></script>
-
   <script src="js/main.js"></script>
 
 </html>

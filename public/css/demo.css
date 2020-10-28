@@ -20,6 +20,8 @@ button:hover {
 
 body {
 
+  overflow:auto;
+  
   position: fixed;
   width: 75%;
   left: 50%;

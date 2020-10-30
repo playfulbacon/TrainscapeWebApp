@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         console.log('Connection opened!');
       });
 
-      ws.addEventListener('message', function(message){
+      ws.addEventListener('message', (message) => {
 
         var webAppMessage = JSON.parse(message.data);
 
@@ -24,8 +24,15 @@ document.addEventListener("DOMContentLoaded", function(event) {
         }
 
         if (webAppMessage.messageType == "MISSION_STARTED"){
-          document.querySelector('#waiting-for-start').style.display = "none";
-          document.querySelector('#navigator').style.display = "block";
+          missionStarted();
+        }
+
+        if (webAppMessage.messageType == "WAGON_ENTERED"){
+          document.querySelector('#wagon-name').innerHTML = webAppMessage.data;
+
+          hackables.forEach(hackable => {
+            hackable.hideNavigatorButton();
+          });
         }
       });
 
@@ -33,20 +40,21 @@ document.addEventListener("DOMContentLoaded", function(event) {
         ws = null;
       });
 
-      document.querySelector('#back-button').addEventListener('click', function(){
-        document.querySelector('#navigator').style.display = "block";
-        document.querySelector('#' + currentHackableId).style.display = "none";
-        document.querySelector('#back-button').style.display = "none";
-
-        ws.send(JSON.stringify({messageType: currentHackableId + '_DESELECTED'}));
+      document.querySelector('#back-button').addEventListener('click', () => {
+        returnToNavigator();
       });
 
-      document.querySelector('#connect-button').addEventListener('click', function(){
+      document.querySelector('#connect-button').addEventListener('click', () => {
         var roomCode =  document.querySelector('#room-code-input').value.toLowerCase();
 
         if (roomCode == "test"){
-          document.querySelector('#connect').style.display = "none";
-          document.querySelector('#navigator').style.display = "block";
+          missionStarted();
+
+          // show all hackables when testing
+          hackables.forEach(hackable => {
+            hackable.showNavigatorButton();
+          });
+
           return;
         }
 

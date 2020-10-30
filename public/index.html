@@ -23,20 +23,25 @@
 
     <button id="back-button">&lt; BACK</button>
 
-    <div id="parent">
-      <div class="navigator" id="navigator">
-        <h1>HACKABLE OBJECTS</h1>
-      </div>
-      <div id="game-content"></div>
+
+    <div class= "navigator" id="navigator">
+      <h1 id="wagon-name">WAGON NAME</h1>
+      <p>Hackable Objects</p>
+      <table id="navigator-buttons"> </table>
     </div>
+
+    <div id="game-content"></div>
 
     <pre id="messages" hidden></pre>
 
   </body>
 
-  <script>     
+  <script>  
+
+  // move all this into main.js
+
   var ws = new WebSocket(location.origin.replace(/^http/, 'ws'));
-  var puzzles = new Map();
+  var hackables = new Map();
   var currentHackableId;
 
   function selectHackable(id){
@@ -49,22 +54,29 @@
     currentHackableId = id;
   }
 
+  function returnToNavigator(){
+    document.querySelector('#navigator').style.display = "block";
+    document.querySelector('#' + currentHackableId).style.display = "none";
+    document.querySelector('#back-button').style.display = "none";
+
+    ws.send(JSON.stringify({messageType: currentHackableId + '_DESELECTED'}));
+  }
+
   function selectPuzzle(puzzleId){
     selectHackable(puzzleId);
+
     ws.send(JSON.stringify({messageType: puzzleId + '_SELECTED'}));
   }
 
-  function newNavigatorButton(id){
-    var btn = document.createElement("BUTTON");
-    btn.setAttribute('id', id + "-navigator-button");
-    //btn.setAttribute('class', "puzzle-button-nav");
-    btn.innerHTML = id;
-    document.querySelector('#navigator').appendChild(btn);
-    return btn;
+  function missionStarted() {
+    document.querySelector('#connect').style.display = "none";
+    document.querySelector('#waiting-for-start').style.display = "none";
+    document.querySelector('#navigator').style.display = "block";
   }
 
   </script>
 
+  <script src="js/hackable.js"></script>
   <script src="js/puzzle.js"></script>
 
   <script src="js/bot.js"></script>
@@ -80,5 +92,19 @@
   <script src="js/puzzle-train-settings.js"></script>
   <script src="js/puzzle-luggage-combo-lock.js"></script>
   <script src="js/main.js"></script>
+
+  <script>
+    new Puzzle("Wagon_1_A");
+    new Puzzle("Wagon_1_B");
+    new Puzzle("Wagon_1_C");
+
+    new Puzzle("Wagon_2_A");
+    new Puzzle("Wagon_2_B");
+    new Puzzle("Wagon_2_C");
+
+    new Puzzle("Wagon_3_A");
+    new Puzzle("Wagon_3_B");
+    new Puzzle("Wagon_3_C");
+  </script>
 
 </html>

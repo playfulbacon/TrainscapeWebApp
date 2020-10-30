@@ -1,54 +1,51 @@
-class Puzzle{
+class Puzzle extends Hackable{
   
-  constructor(puzzleId, htmlPath, setupCallback, responseCallback = {}, inputCallback = {}){
+  constructor(puzzleId, htmlPath, setupCallback = {}, responseCallback = {}, inputCallback = {}){
 
-    this.puzzleId = puzzleId;
+    super(puzzleId);
 
-    ws.addEventListener('message', function(event){
+    ws.addEventListener('message', (event) => {
       var webAppMessage = JSON.parse(event.data);
-      if (webAppMessage.messageType == puzzleId + "_SETUP"){
+      if (webAppMessage.messageType == this.id + "_SETUP"){
         var webAppSetup = JSON.parse(webAppMessage.data);
         setupCallback(webAppSetup);
       }
-      if (webAppMessage.messageType == puzzleId + "_RESPONSE"){
+      if (webAppMessage.messageType == this.id + "_RESPONSE"){
         var webAppResponse = JSON.parse(webAppMessage.data);
         responseCallback(webAppResponse);
       }
-      if (webAppMessage.messageType == puzzleId + "_INPUT"){
+      if (webAppMessage.messageType == this.id + "_INPUT"){
         var webAppInput = JSON.parse(webAppMessage.data);
         inputCallback(webAppInput);
       }
     });    
 
     // dynamically add puzzle html and navigation button
-    fetch(htmlPath)
-    .then((response) => {
-        return response.text();
-    })
-    .then((body) => {
-        // puzzle html
-        var div = document.createElement('div');
-        div.setAttribute('id', puzzleId);
-        div.innerHTML = body;
-        div.style.display = "none";
-        document.querySelector('#game-content').appendChild(div);
-
-        // navigation button
-        var btn = newNavigatorButton(puzzleId);
-        btn.addEventListener('click', function(){
-          selectPuzzle(puzzleId); //index.html function
-        });
-    });
-
-    // add puzzle to dictionary that uses id as a key
-    // TODO: use dictionary to show / hide puzzles on mission setup
-    puzzles.set(puzzleId, this);
+    if (htmlPath != null){
+      fetch(htmlPath)
+      .then((response) => {
+          return response.text();
+      })
+      .then((body) => {
+          // puzzle html
+          var div = document.createElement('div');
+          div.setAttribute('id', this.id);
+          div.innerHTML = body;
+          div.style.display = "none";
+          document.querySelector('#game-content').appendChild(div);
+  
+          // navigation button is created in Hackable constructor 
+          this.navigatorButton.addEventListener('click', () => {
+            selectPuzzle(this.id); //index.html function
+          });
+      });
+    }
   }
 
-  sendData = function(data){
+  sendData(){
     
     var webAppMessage = {
-        messageType: this.puzzleId + '_DATA',
+        messageType: this.id + '_DATA',
         data: JSON.stringify(data)
     };
 

@@ -1,19 +1,21 @@
-class Bot{
+class Bot extends Hackable {
   
-    constructor(puzzleId){
+    botInfo = ["-EMPTY-","-EMPTY-","-EMPTY-","-EMPTY-"];
+
+    constructor(botId){
   
-        this.botInfo = ["-EMPTY-","-EMPTY-","-EMPTY-","-EMPTY-"];
+        super(botId);
 
         ws.addEventListener('message', (event) => {
             var webAppMessage = JSON.parse(event.data);
-            if (webAppMessage.messageType == puzzleId + "_SETUP"){
+            if (webAppMessage.messageType == botId + "_SETUP"){
               var webAppSetup = JSON.parse(webAppMessage.data);
               this.botInfo = webAppSetup.botInfo;
             }
         });  
-        
-        var btn = newNavigatorButton(puzzleId);
-        btn.addEventListener('click', () => {
+
+        // navigation button is created in Hackable constructor 
+        this.navigatorButton.addEventListener('click', () => {
 
             //folder contents
             var data = document.getElementsByClassName("data");

@@ -14,13 +14,18 @@ table{
   margin-left: auto;
   margin-right: auto;
   border-spacing: 20px;
-  border: 1px dotted black;
+  border: 2px dotted black;
   margin-top: 20px;
   margin-bottom: 20px;
+  border-radius: 10px;
+}
+
+.navigator table{
+  width: 75%;
 }
 
 input{
-  border-radius: 8px;
+  border-radius: 10px;
   padding: 10px;
 }
 
@@ -28,10 +33,15 @@ button{
   cursor: pointer;
   border: none;
   outline: none;
-  border-radius: 8px;
+  border-radius: 10px;
   padding: 10px;
   color: white;
   background-color: black;
+}
+
+.puzzle-button{
+  width: 60;
+  height: 60;
 }
 
 .navigator button{
@@ -39,9 +49,9 @@ button{
   padding: 18px;
   width: 100%;
   text-align: left;
+  display: block;
 }
 
-/* Style the button that is used to open and close the collapsible content */
 .collapsible {
   padding: 18px;
   width: 100%;

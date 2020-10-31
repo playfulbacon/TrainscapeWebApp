@@ -27,58 +27,19 @@
     <div class= "navigator" id="navigator">
       <h1 id="wagon-name">WAGON NAME</h1>
       <p>Hackable Objects</p>
-      <table id="navigator-buttons"> </table>
+      <table id="navigator-buttons"></table>
     </div>
 
-    <div id="game-content"></div>
+    <div id="game-content" style="margin-top:20px;"></div>
 
     <pre id="messages" hidden></pre>
 
   </body>
 
-  <script>  
-
-  // move all this into main.js
-
-  var ws = new WebSocket(location.origin.replace(/^http/, 'ws'));
-  var hackables = new Map();
-  var currentHackableId;
-
-  function selectHackable(id){
-    console.log('select hackable: ' + id);
-
-    document.querySelector('#navigator').style.display = "none";
-    document.querySelector('#' + id).style.display = "block";
-    document.querySelector('#back-button').style.display = "block";
-
-    currentHackableId = id;
-  }
-
-  function returnToNavigator(){
-    document.querySelector('#navigator').style.display = "block";
-    document.querySelector('#' + currentHackableId).style.display = "none";
-    document.querySelector('#back-button').style.display = "none";
-
-    ws.send(JSON.stringify({messageType: currentHackableId + '_DESELECTED'}));
-  }
-
-  function selectPuzzle(puzzleId){
-    selectHackable(puzzleId);
-
-    ws.send(JSON.stringify({messageType: puzzleId + '_SELECTED'}));
-  }
-
-  function missionStarted() {
-    document.querySelector('#connect').style.display = "none";
-    document.querySelector('#waiting-for-start').style.display = "none";
-    document.querySelector('#navigator').style.display = "block";
-  }
-
-  </script>
+  <script src="js/main.js"></script>
 
   <script src="js/hackable.js"></script>
   <script src="js/puzzle.js"></script>
-
   <script src="js/bot.js"></script>
   <script src="js/bot-setup.js"></script>
 
@@ -91,9 +52,10 @@
   <script src="js/info-passengers-list.js"></script>
   <script src="js/puzzle-train-settings.js"></script>
   <script src="js/puzzle-luggage-combo-lock.js"></script>
-  <script src="js/main.js"></script>
 
   <script>
+    // TEST PUZZLES
+    /*
     new Puzzle("Wagon_1_A");
     new Puzzle("Wagon_1_B");
     new Puzzle("Wagon_1_C");
@@ -105,6 +67,7 @@
     new Puzzle("Wagon_3_A");
     new Puzzle("Wagon_3_B");
     new Puzzle("Wagon_3_C");
+    */
   </script>
 
 </html>

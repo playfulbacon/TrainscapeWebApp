@@ -31,9 +31,10 @@ class Puzzle extends Hackable{
           var div = document.createElement('div');
           div.setAttribute('id', this.id);
           div.innerHTML = body;
-          div.style.display = "none";
           document.querySelector('#game-content').appendChild(div);
-  
+          
+          div.hidden = true;
+          
           // navigation button is created in Hackable constructor 
           this.navigatorButton.addEventListener('click', () => {
             selectPuzzle(this.id); //index.html function
@@ -42,7 +43,7 @@ class Puzzle extends Hackable{
     }
   }
 
-  sendData(){
+  sendData(data){
     
     var webAppMessage = {
         messageType: this.id + '_DATA',

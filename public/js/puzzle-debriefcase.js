@@ -8,11 +8,7 @@ var debriefcasePuzzle = new Puzzle("DEBRIEFCASE", "./html/puzzle-debriefcase.htm
         }
 
         document.querySelector('#debriefcase-button').addEventListener('click', function(){
-            
-            var webAppData = {
-
-            }
-    
+            var webAppData = {};
             debriefcasePuzzle.sendData(webAppData);
         });
     },

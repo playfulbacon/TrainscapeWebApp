@@ -45,11 +45,9 @@ button{
 }
 
 .navigator button{
-  margin-bottom: 20px;
   padding: 18px;
   width: 100%;
   text-align: left;
-  display: block;
 }
 
 .collapsible {

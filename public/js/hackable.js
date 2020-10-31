@@ -2,6 +2,7 @@ class Hackable{
 
     id = 'NONE';
     unlocked = true;
+    navigatorContainer;
     navigatorButton;
 
     constructor(id) {
@@ -33,26 +34,27 @@ class Hackable{
     }
 
     hideNavigatorButton() {
-        console.log('hide hackable: ' + this.id);
-
-        this.navigatorButton.style.display = "none";
-        //document.querySelector('#' + this.id + "-navigator-button").style.display = "none";
+        this.navigatorContainer.hidden = true;
     }
     
     showNavigatorButton() {
-        console.log('show hackable: ' + this.id);
-
-        this.navigatorButton.style.display = "block";
-        //document.querySelector('#' + this.id + "-navigator-button").style.display = "block";
+        this.navigatorContainer.hidden = false;
     }
 
     createNavigatorButton() {
         var btn = document.createElement("BUTTON");
-        btn.setAttribute('id', this.id + "-navigator-button");
         btn.innerHTML = this.id;
-        document.querySelector('#navigator-buttons').appendChild(btn);
-        btn.style.display = "none";
+
+        var table = document.getElementById("navigator-buttons");
+        var row = table.insertRow(0);
+        row.setAttribute('id', this.id + "-navigator-button");
+        var cell = row.insertCell(0);
+        cell.appendChild(btn);
+
+        this.navigatorContainer = row;
+
         this.navigatorButton = btn;
-        return btn;
+
+        this.hideNavigatorButton();
     }
 }

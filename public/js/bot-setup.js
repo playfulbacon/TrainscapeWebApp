@@ -6,7 +6,9 @@ fetch("./html/bot.html")
     var div = document.createElement('div');
     div.setAttribute('id', "bot");
     div.innerHTML = body;
-    div.style.display = "none";
+
+    div.hidden = true;
+
     document.querySelector('#game-content').appendChild(div);
 
     //folder structure setup

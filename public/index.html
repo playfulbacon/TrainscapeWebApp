@@ -8,7 +8,7 @@
 
   <body>
   
-    <div class="connect" id="connect">
+    <div class="connect" id="STATE_CONNECT">
       <div class="message"><p>Welcome Hacker,<br> Please enter your Hacker ID to connect with your agent.</p></div>
       
       <div style="margin-top:20px;">
@@ -17,14 +17,14 @@
       </div>
     </div>
    
-    <div class="connect" id="waiting-for-start">
+    <div class="connect" id="STATE_CONNECTING">
       <div><p>Connected!<br><br> Waiting for your agent to start the game...</p></div>
     </div>
 
     <button id="back-button">&lt; BACK</button>
 
 
-    <div class= "navigator" id="navigator">
+    <div class= "navigator" id="STATE_HACKABLES">
       <h1 id="wagon-name">WAGON NAME</h1>
       <p>Hackable Objects</p>
       <table id="navigator-buttons"></table>
@@ -54,8 +54,7 @@
   <script src="js/puzzle-luggage-combo-lock.js"></script>
 
   <script>
-    // TEST PUZZLES
-    /*
+    // TEST PUZZLES   
     new Puzzle("Wagon_1_A");
     new Puzzle("Wagon_1_B");
     new Puzzle("Wagon_1_C");
@@ -67,7 +66,7 @@
     new Puzzle("Wagon_3_A");
     new Puzzle("Wagon_3_B");
     new Puzzle("Wagon_3_C");
-    */
+    
   </script>
 
 </html>

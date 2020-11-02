@@ -12,7 +12,7 @@ class Hackable{
         ws.addEventListener('message', (event) => {
             var webAppMessage = JSON.parse(event.data);
             if (webAppMessage.messageType == this.id + "_WAGON_ENTERED"){
-                this.enterWagon();
+                this.groupEntered();
             }
 
             if (webAppMessage.messageType == this.id + "_UNLOCK"){
@@ -28,7 +28,7 @@ class Hackable{
         this.showNavigatorButton();
     }
 
-    enterWagon() {
+    groupEntered() {
         if (this.unlocked)
             this.showNavigatorButton();
     }

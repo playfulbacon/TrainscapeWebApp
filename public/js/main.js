@@ -1,11 +1,12 @@
 var ws = new WebSocket(location.origin.replace(/^http/, 'ws'));
 var hackables = new Map();
 var currentHackableId;
+var puzzleGroups;
 
 const states = { 
   CONNECT: 'connect',
   CONNECTING: 'connecting',
-  MENU: 'menu',
+  HACKABLES: 'hackables',
   PUZZLE: 'puzzle'
 }
 
@@ -16,10 +17,10 @@ var state = {
 
     this.state = newState;
 
-    document.querySelector('#connect').hidden = !(this.state == states.CONNECT);
-    document.querySelector('#navigator').hidden = !(this.state == states.MENU);
+    document.querySelector('#STATE_CONNECT').hidden = !(this.state == states.CONNECT);
+    document.querySelector('#STATE_CONNECTING').hidden = !(this.state == states.CONNECTING);
+    document.querySelector('#STATE_HACKABLES').hidden = !(this.state == states.HACKABLES);
     document.querySelector('#back-button').hidden = !(this.state == states.PUZZLE);
-    document.querySelector('#waiting-for-start').hidden = !(this.state == states.CONNECTING);
 
     console.log("state set to: " + this.state);
   }
@@ -51,40 +52,54 @@ function selectPuzzle(puzzleId){
 }
 
 function missionStarted() {
+  console.log("mission started");
 
-  state.current = states.MENU;
+  state.current = states.HACKABLES;
 }
 
 ws.addEventListener('open', function(event){
   console.log('Connection opened!');
 });
 
-ws.addEventListener('message', (message) => {
+ws.addEventListener('message', (event) => {
 
-  var webAppMessage = JSON.parse(message.data);
+  var webAppMessage = JSON.parse(event.data);
 
   if (webAppMessage.messageType == "JOINED_ROOM"){
     
-    document.querySelector('#connect').hidden = true;
-    document.querySelector('#waiting-for-start').hidden = false;
+    state.current = states.CONNECTING;
 
     var message = {
       messageType: 'WEB_APP_PLAYER_JOINED',
     };
+
     ws.send(JSON.stringify(message));
   }
 
   if (webAppMessage.messageType == "MISSION_STARTED"){
+    var missionSetupData = JSON.parse(webAppMessage.data);
+    puzzleGroups = missionSetupData.puzzleGroups;
     missionStarted();
   }
 
   if (webAppMessage.messageType == "WAGON_ENTERED"){
-    document.querySelector('#wagon-name').innerHTML = webAppMessage.data;
+    var wagonIndex = parseInt(webAppMessage.data);
 
+    document.querySelector('#wagon-name').innerHTML = puzzleGroups[wagonIndex].groupName;
+
+    // hide all hackables
     hackables.forEach(hackable => {
       hackable.hideNavigatorButton();
     });
+
+    // show puzzles in current wagon
+    var puzzleIds = puzzleGroups[wagonIndex].puzzleIds;
+
+    puzzleIds.forEach(puzzleId => {
+      hackables.get(puzzleId).groupEntered();
+    });
   }
+
 });
 
 ws.addEventListener('close', function(event){

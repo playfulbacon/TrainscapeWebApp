@@ -1,0 +1,61 @@
+body {
+  position: fixed;
+  width: 75%;
+  left: 50%;
+  transform: translate(-50%);
+
+  margin-top: 20px;
+  padding: 0;
+
+  text-align: center;
+}
+
+table{
+  margin-left: auto;
+  margin-right: auto;
+  border-spacing: 20px;
+  border: 2px dotted black;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+
+.navigator table{
+  width: 75%;
+}
+
+input{
+  border-radius: 10px;
+  padding: 10px;
+}
+
+button{
+  cursor: pointer;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  padding: 10px;
+  color: white;
+  background-color: black;
+}
+
+.puzzle-button{
+  width: 60;
+  height: 60;
+}
+
+.navigator button{
+  padding: 18px;
+  width: 100%;
+  text-align: left;
+}
+
+.collapsible {
+  padding: 18px;
+  width: 100%;
+  text-align: left;
+}
+
+.content{
+  text-align: left;
+}

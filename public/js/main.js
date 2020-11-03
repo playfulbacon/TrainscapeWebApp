@@ -1,126 +1,140 @@
-document.addEventListener("DOMContentLoaded", function(event) {     
+var ws = new WebSocket(location.origin.replace(/^http/, 'ws'));
+var hackables = new Map();
+var currentHackableId;
+var puzzleGroups;
 
-      var currentPageId = '';
-      var currentPuzzleId = '';
+const states = { 
+  CONNECT: 'connect',
+  CONNECTING: 'connecting',
+  HACKABLES: 'hackables',
+  PUZZLE: 'puzzle'
+}
 
-      document.querySelector('#navigator').style.display = "none";
-      document.querySelector('#machine-door-panel').style.display = "none";
-      document.querySelector('#machine-storage-box').style.display = "none";
-      document.querySelector('#machine-drink-dispenser').style.display = "none";
-      document.querySelector('#back-button').style.display = "none";
-      document.querySelector('#waiting-for-start').style.display = "none";
+var state = {
+  state,
 
-      ws.addEventListener('open', function(event){
-        console.log('Connection opened!');
-      });
+  set current(newState){
 
-      ws.addEventListener('message', function(message){
-        console.log('message received');
+    this.state = newState;
 
-        var webAppMessage = JSON.parse(message.data);
+    document.querySelector('#STATE_CONNECT').hidden = !(this.state == states.CONNECT);
+    document.querySelector('#STATE_CONNECTING').hidden = !(this.state == states.CONNECTING);
+    document.querySelector('#STATE_HACKABLES').hidden = !(this.state == states.HACKABLES);
+    document.querySelector('#back-button').hidden = !(this.state == states.PUZZLE);
 
-        if (webAppMessage.roomCode.toLowerCase() == roomCode){
-          showMessage(message.data);
-        }
+    console.log("state set to: " + this.state);
+  }
+};
 
-        if (webAppMessage.messageType == "JOINED_ROOM"){
-          
-          document.querySelector('#connect').style.display = "none";
-          document.querySelector('#waiting-for-start').style.display = "block";
+state.current = states.CONNECT;
 
-          var message = {
-            messageType: 'WEB_APP_PLAYER_JOINED',
-            roomCode: roomCode,
-          };
-          ws.send(JSON.stringify(message));
-        }
+function selectHackable(id){
 
-        if (webAppMessage.messageType == "MISSION_STARTED"){
-          document.querySelector('#waiting-for-start').style.display = "none";
-          document.querySelector('#navigator').style.display = "block";
-        }
-      });
+  document.querySelector('#' + id).hidden = false;
+  currentHackableId = id;
 
-      ws.addEventListener('close', function(event){
-        ws = null;
-      });
+  state.current = states.PUZZLE;
+}
 
-      const connectBtn = document.querySelector('#connect-button');
-      const testBtn = document.querySelector('#test-button');
-      const messages = document.querySelector('#messages');
+function returnToNavigator(){
 
-      //TODO: dynamically create these buttons and add click event listeners in puzzle.js
-      const machineDoorPanelButton = document.querySelector('#machine-door-panel-button');
-      const machineStorageBoxButton = document.querySelector('#machine-storage-box-button');
-      const machineDrinkDispenserButton = document.querySelector('#machine-drink-dispenser-button');
+  document.querySelector('#' + currentHackableId).hidden = true;
 
-      document.querySelector('#back-button').addEventListener('click', function(){
-        document.querySelector('#navigator').style.display = "block";
-        document.querySelector(currentPageId).style.display = "none";
-        document.querySelector('#back-button').style.display = "none";
+  state.current = states.MENU;
 
-        ws.send(JSON.stringify({messageType: currentPuzzleId + '_DESELECTED', roomCode: roomCode}));
-      });
+  ws.send(JSON.stringify({messageType: currentHackableId + '_DESELECTED'}));
+}
 
-      connectBtn.addEventListener('click', function(){
-        console.log("connect button pressed");
+function selectPuzzle(puzzleId){
+  selectHackable(puzzleId);
 
-        roomCode =  document.querySelector('#room-code-input').value.toLowerCase();
-        var joinRequest = {
-            messageType: 'ROOM_JOIN_REQUEST',
-            roomCode: roomCode,
-        };
+  ws.send(JSON.stringify({messageType: puzzleId + '_SELECTED'}));
+}
 
-        ws.send(JSON.stringify(joinRequest));
-      });
+function missionStarted() {
+  console.log("mission started");
 
-      testBtn.addEventListener('click', function(){
-        console.log("test button pressed");
+  state.current = states.HACKABLES;
+}
 
-        var test = {
-            messageType: 'TEST',
-            roomCode: roomCode,
-        };
+ws.addEventListener('open', function(event){
+  console.log('Connection opened!');
+});
 
-        ws.send(JSON.stringify(test));
-      });
+ws.addEventListener('message', (event) => {
 
-      // TODO: create selectPuzzle function, hook up to dynamically created buttons from puzzle.js
-      machineDoorPanelButton.addEventListener('click', function(){
+  var webAppMessage = JSON.parse(event.data);
 
-        document.querySelector('#navigator').style.display = "none";
-        document.querySelector('#machine-door-panel').style.display = "block";
-        document.querySelector('#back-button').style.display = "block";
-        currentPageId = '#machine-door-panel';
+  if (webAppMessage.messageType == "JOINED_ROOM"){
+    
+    state.current = states.CONNECTING;
 
-        currentPuzzleId = 'DOOR_PANEL';
-        ws.send(JSON.stringify({messageType: currentPuzzleId + '_SELECTED', roomCode: roomCode}));
-      });
+    var message = {
+      messageType: 'WEB_APP_PLAYER_JOINED',
+    };
 
-      machineStorageBoxButton.addEventListener('click', function(){
+    ws.send(JSON.stringify(message));
+  }
 
-        document.querySelector('#navigator').style.display = "none";
-        document.querySelector('#machine-storage-box').style.display = "block";
-        document.querySelector('#back-button').style.display = "block";
-        currentPageId = '#machine-storage-box';
+  if (webAppMessage.messageType == "MISSION_STARTED"){
+    var missionSetupData = JSON.parse(webAppMessage.data);
+    puzzleGroups = missionSetupData.puzzleGroups;
+    missionStarted();
+  }
 
-        currentPuzzleId = 'STORAGE_BOX';
-        ws.send(JSON.stringify({messageType: currentPuzzleId + '_SELECTED', roomCode: roomCode}));
-      });
+  if (webAppMessage.messageType == "WAGON_ENTERED"){
+    var wagonIndex = parseInt(webAppMessage.data);
 
-      machineDrinkDispenserButton.addEventListener('click', function(){
+    document.querySelector('#wagon-name').innerHTML = puzzleGroups[wagonIndex].groupName;
 
-        document.querySelector('#navigator').style.display = "none";
-        document.querySelector('#machine-drink-dispenser').style.display = "block";
-        document.querySelector('#back-button').style.display = "block";
-        currentPageId = '#machine-drink-dispenser';
-
-        currentPuzzleId = 'DRINK_DISPENSER';
-        ws.send(JSON.stringify({messageType: currentPuzzleId + '_SELECTED', roomCode: roomCode}));
-      });
-
-      function showMessage(message) {
-        messages.textContent = message + "\n\n" + messages.textContent;
-        messages.scrollTop = messages.scrollHeight;
-      }
+    // hide all hackables
+    hackables.forEach(hackable => {
+      hackable.hideNavigatorButton();
     });
+
+    // show puzzles in current wagon
+    var puzzleIds = puzzleGroups[wagonIndex].puzzleIds;
+
+    puzzleIds.forEach(puzzleId => {
+      hackables.get(puzzleId).groupEntered();
+    });
+  }
+
+});
+
+ws.addEventListener('close', function(event){
+  ws = null;
+});
+
+document.querySelector('#back-button').addEventListener('click', () => {
+  returnToNavigator();
+});
+
+document.querySelector('#connect-button').addEventListener('click', () => {
+  console.log("connect button pressed");
+
+  var roomCode =  document.querySelector('#room-code-input').value.toLowerCase();
+
+  if (roomCode == "test"){
+    missionStarted();
+
+    // show all hackables when testing
+    hackables.forEach(hackable => {
+      hackable.showNavigatorButton();
+    });
+
+    return;
+  }
+
+  var joinRequest = {
+      messageType: 'ROOM_JOIN_REQUEST',
+      data: roomCode
+  };
+
+  ws.send(JSON.stringify(joinRequest));
+});
+
+function showMessage(message) {
+  messages.textContent = message + "\n\n" + messages.textContent;
+  messages.scrollTop = messages.scrollHeight;
+}

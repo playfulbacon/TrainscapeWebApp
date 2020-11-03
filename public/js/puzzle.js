@@ -1,25 +1,52 @@
-class Puzzle{
+class Puzzle extends Hackable{
   
-  constructor(puzzleId, setupCallback){
+  constructor(puzzleId, htmlPath, setupCallback = {}, responseCallback = {}, inputCallback = {}){
 
-    this.puzzleId = puzzleId;
+    super(puzzleId);
 
-    ws.addEventListener('message', function(event){
+    ws.addEventListener('message', (event) => {
       var webAppMessage = JSON.parse(event.data);
-      if (webAppMessage.messageType == puzzleId + "_SETUP"){
+      if (webAppMessage.messageType == this.id + "_SETUP"){
         var webAppSetup = JSON.parse(webAppMessage.data);
         setupCallback(webAppSetup);
       }
+      if (webAppMessage.messageType == this.id + "_RESPONSE"){
+        var webAppResponse = JSON.parse(webAppMessage.data);
+        responseCallback(webAppResponse);
+      }
+      if (webAppMessage.messageType == this.id + "_INPUT"){
+        var webAppInput = JSON.parse(webAppMessage.data);
+        inputCallback(webAppInput);
+      }
     });    
 
-    //TODO: add button to html that represents puzzle with naming convention using puzzleId
+    // dynamically add puzzle html and navigation button
+    if (htmlPath != null){
+      fetch(htmlPath)
+      .then((response) => {
+          return response.text();
+      })
+      .then((body) => {
+          // puzzle html
+          var div = document.createElement('div');
+          div.setAttribute('id', this.id);
+          div.innerHTML = body;
+          document.querySelector('#game-content').appendChild(div);
+          
+          div.hidden = true;
+          
+          // navigation button is created in Hackable constructor 
+          this.navigatorButton.addEventListener('click', () => {
+            selectPuzzle(this.id); //index.html function
+          });
+      });
+    }
   }
 
-  sendData = function(data){
+  sendData(data){
     
     var webAppMessage = {
-        messageType: this.puzzleId + '_DATA',
-        roomCode: roomCode,
+        messageType: this.id + '_DATA',
         data: JSON.stringify(data)
     };
 

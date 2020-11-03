@@ -2,105 +2,71 @@
 
   <head>
   <title>Trainscape</title>
-  <link rel="stylesheet" href="css/demo.css"/>
+  <link rel="stylesheet" href="css/simple.css"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
 
   <body>
   
-    <div class="connect" id="connect">
-          <div class="message"><p>Welcome Hacker,<br> Please enter your Hacker ID to connect with your agent.</p></div>
+    <div class="connect" id="STATE_CONNECT">
+      <div class="message"><p>Welcome Hacker,<br> Please enter your Hacker ID to connect with your agent.</p></div>
+      
+      <div style="margin-top:20px;">
       <input class="hackerid" type="text" id="room-code-input" placeholder="HACKER ID" maxlength="4" style="text-transform:uppercase" />
-      <button class="connect-button" id="connect-button">CONNECT</button>
-      <button id="test-button" hidden>Broadcast To Room</button>
+      <button id="connect-button">CONNECT</button>
+      </div>
     </div>
    
-    <div class="grid-container" id="navigator" style="margin-top: 90px; height: 300px; padding-bottom:-70px;">
-      <div class="panel_title">MAIN MENU</div>
-      <button id="machine-door-panel-button" class="puzzle-button-nav">DOOR PANEL</button>
-      <button id="machine-storage-box-button" class="puzzle-button-nav">BRIEFCASE</button>
-      <button id="machine-drink-dispenser-button" class="puzzle-button-nav">DRINK DISPENSER</button>
-      <button id="bot-guard-button" hidden class="puzzle-button-nav">GUARD BOT</button>
-      <button id="bot-bartender-button" hidden class="puzzle-button-nav">BARTENDER BOT</button>
-      <button id="test-css-button" hidden class="puzzle-button-nav">Test CSS</button>
-    </div>
-
-    <div><button class="connect-button" id="back-button">BACK</button></div>
-
-    <div class="connect" id="waiting-for-start">
+    <div class="connect" id="STATE_CONNECTING">
       <div><p>Connected!<br><br> Waiting for your agent to start the game...</p></div>
     </div>
 
-    <div id="game-content" style="margin-top:90px;"> 
-      <div id = "machine-door-panel">
-
-        <style>
-          .door-panel-answer {
-            font-size: x-large;
-            font-weight: bolder;
-          }
-        </style>
-      
+    <button id="back-button">&lt; BACK</button>
 
 
-        <div class="grid-container-door">
-            <div class="panel_title">DOOR PANEL</div>
-           <div class="door-panel-answer">
-          <span id="answer-0">?</span> <span id="answer-1">?</span> <span id="answer-2">?</span> <span id="answer-3">?</span>
-            </div>
-            <div><button id="panel-button-0" class="puzzle-button">?</button></div>
-            <div><button id="panel-button-1" class="puzzle-button">?</button></div>
-            <div><button id="panel-button-2" class="puzzle-button">?</button></div>
-            <div><button id="panel-button-3" class="puzzle-button">?</button></div>
-            <div><button id="panel-button-4" class="puzzle-button">?</button></div>
-            <div><button id="panel-button-5" class="puzzle-button">?</button></div>
-            <div><button id="panel-button-6" class="puzzle-button">?</button></div>
-            <div><button id="panel-button-7" class="puzzle-button">?</button></div>
-            <div><button id="panel-button-8" class="puzzle-button">?</button></div>
-        </div>
-      </div>
+    <div class= "navigator" id="STATE_HACKABLES">
+      <h1 id="wagon-name">WAGON NAME</h1>
+      <p>Hackable Objects</p>
+      <table id="navigator-buttons"></table>
+    </div>
 
-      <div id="machine-drink-dispenser">
-        <div class="grid-container">
-            <div class="panel_title">DRINK MIXER</div>
-            <button id="drink-button-0" class="puzzle-button">1</button>
-            <button id="drink-button-1" class="puzzle-button">2</button>
-            <button id="drink-button-2" class="puzzle-button">3</button>
-            <button id="drink-button-3" class="puzzle-button">4</button>
-            <button id="drink-button-4" class="puzzle-button">5</button>
-            <button id="drink-button-5" class="puzzle-button">6</button>
-            <p class = "drink-recipes" id="drink-recipes" style="white-space: pre-line"></p>
-        </div>        
-     
-      </div>
-    
-      <div class="briefcase-container" id = "machine-storage-box">
-        <img class="train-img" src="img/train.jpg"/>
-        <p id="train-ID"></p>
-        <input class="hackerid" type="number" id="storage-box-input" placeholder="ENTER CODE" maxlength="4" style="text-transform:uppercase" />
-        <button class="connect-button" id="storage-box-button">SEND</button>
-      </div>
+    <div id="game-content" style="margin-top:20px;"></div>
 
-    </div> <!-- end of game content -->
-
-    <pre id="messages" style="margin-top:20px;" hidden></pre>
+    <pre id="messages" hidden></pre>
 
   </body>
 
-  <!-- global variables -->
-  <script>      
-  var ws = new WebSocket(location.origin.replace(/^http/, 'ws'));
-  var roomCode = '';
-  </script>
-
-  <script src="js/puzzle.js"></script>
-
   <script src="js/main.js"></script>
 
+  <script src="js/hackable.js"></script>
+  <script src="js/puzzle.js"></script>
+  <script src="js/bot.js"></script>
+  <script src="js/bot-setup.js"></script>
+
+  <!--LIST OF PUZZLES-->
+  <script src="js/puzzle-debriefcase.js"></script>
   <script src="js/puzzle-storage-box.js"></script>
-
   <script src="js/puzzle-drink-dispenser.js"></script>
-
   <script src="js/puzzle-door-panel.js"></script>
+  <script src="js/puzzle-example.js"></script>
+  <script src="js/info-passengers-list.js"></script>
+  <script src="js/puzzle-train-settings.js"></script>
+  <script src="js/puzzle-luggage-combo-lock.js"></script>
+
+  <script>
+    // TEST PUZZLES   
+    new Puzzle("Wagon_1_A");
+    new Puzzle("Wagon_1_B");
+    new Puzzle("Wagon_1_C");
+
+    new Puzzle("Wagon_2_A");
+    new Puzzle("Wagon_2_B");
+    new Puzzle("Wagon_2_C");
+
+    new Puzzle("Wagon_3_A");
+    new Puzzle("Wagon_3_B");
+    new Puzzle("Wagon_3_C");
+    
+  </script>
 
 </html>

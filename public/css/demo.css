@@ -1,6 +1,57 @@
 @import url("https://fonts.googleapis.com/css2?family=Orbitron&display=swap");
 @import url('https://fonts.googleapis.com/css?family=VT323&subset=latin-ext');
 
+button {
+  font-family: 'Varela Round', sans-serif;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  font-size: 25px;
+}
+button:hover {
+  cursor: pointer;
+}
+
+.navigator button{
+  display: block; /* Make the buttons appear below each other */
+  min-width: 100%;
+  margin-bottom: 20px;
+}
+
+body {
+
+  overflow:auto;
+  
+  position: fixed;
+  width: 75%;
+  left: 50%;
+  transform: translate(-50%);
+
+  margin: 0 auto;
+  padding: 0;
+
+  background: -webkit-radial-gradient(50% 50%, ellipse, #20202D 0%, #101018 75%, #060612 100%);
+  font-family: 'Varela Round', sans-serif;
+  text-align: center;
+  box-sizing: border-box;
+  color: white;
+}
+
+.connect{
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.hackerid{
+  font-family: "Orbitron", sans-serif;
+  height: 50px;
+  font-size: 18px;
+}
+
+/*
 body{
   background: -webkit-radial-gradient(50% 50%, ellipse, #20202D 0%, #101018 75%, #060612 100%);
   background: -moz-radial-gradient(50% 50%, ellipse, #20202D 0%, #101018 75%, #060612 100%);
@@ -11,21 +62,9 @@ body{
   top: 0; 
     overflow: hidden;
 }
+*/
 
-.connect{
-    display: flex;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
-.hackerid{
-    font-family: "Orbitron", sans-serif;
-    height: 50px;
-    font-size: 18px;
-}
-
+/*
 .connect-button{
     font-family: 'VT323', monospace;
     margin-left: 20px;
@@ -34,6 +73,7 @@ body{
     font-size: 25px;
     margin-top: 20px;
 }
+*/
 
 p{
     font-family: 'VT323', monospace;
@@ -84,9 +124,9 @@ p{
 }
 
 .grid-container {         
-  width: 260px;
+  width: 50%;
   padding: 20px;
-    padding-top: 50px;
+  padding-top: 50px;
   background-color:#dde1e7;
   margin: 0 auto;
   position: relative;
@@ -96,10 +136,10 @@ p{
   3px 3px 5px rgba(94, 104, 121, .288);
   display: grid;
   grid-gap: 10px;
-  grid-template-columns: 80px 80px 80px;
-  grid-template-rows: 80px 80px 80px;
+  grid-template-rows: 100%;
   }
 
+/*
 .panel_title{
     position: absolute;
     left: 95px;
@@ -108,6 +148,7 @@ p{
     color: blueviolet;
     font-size: 30px;
 }
+*/
 
 #train-ID{
     
@@ -148,19 +189,40 @@ p{
     left: 120;
 }
 
-#back-button{
-    position: absolute; 
-    left: 890px; 
-    top: 0;
-}
-
 .drink-recipes{
     font-size: 15px;
     position: absolute;
     top: 350;
     left: 0;
-    
 }
+
+/* Style the button that is used to open and close the collapsible content */
+.collapsible {
+  font-family: 'VT323', monospace;
+  background-color: cadetblue;
+  color: chartreuse;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 23px;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active, .collapsible:hover {
+  background-color: rgb(39, 115, 117);
+}
+
+/* Style the collapsible content. Note: hidden by default */
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: rgb(32, 80, 82);
+}
+
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
     p { font-size: 20px; margin-left: 15px; margin-right: 15px;}

@@ -37,9 +37,6 @@ wss.on('connection', (ws) => {
 
     var webAppMessage = JSON.parse(message);
 
-    if (webAppMessage.roomCode)
-      ws.room = webAppMessage.roomCode;
-
     switch (webAppMessage.messageType) {
       case 'CREATE_ROOM_REQUEST': {
 
@@ -54,38 +51,38 @@ wss.on('connection', (ws) => {
           
           const response = {
               messageType: 'ROOM_CREATED_SUCCESS',
-              roomCode: roomCode
+              data: roomCode
           }
 
-          ws.send(JSON.stringify(response));
+          ws.send(JSON.stringify(response)); // send back to client who created the request
       }
       break;
 
       case 'ROOM_JOIN_REQUEST': {
+        ws.room = webAppMessage.data;
         if (!rooms.has(ws.room)) {
             // Tried to connect to a non-existent room
             const response = {
                 messageType: 'ERROR_INVALID_ROOM',
-                roomCode: ws.room,
             }
             ws.send(JSON.stringify(response));
         } 
         else {
           ws.inGame = true;
+          
           const players = rooms.get(ws.room);
           players.push({
               client: ws
           });
           rooms.set(ws.room, players);
+
           const broadcastResponse = {
               messageType: 'PLAYER_JOINED',
-              roomCode: ws.room,
           }
-          broadcastToRoom(ws.room, JSON.stringify(broadcastResponse));
+          broadcastToOthersInRoom(ws, JSON.stringify(broadcastResponse));
 
           const response = {
             messageType: 'JOINED_ROOM',
-            roomCode: ws.room,
           }
           ws.send(JSON.stringify(response));
         }
@@ -93,7 +90,7 @@ wss.on('connection', (ws) => {
     break;
 
     default: {
-      broadcastToRoom(ws.room, message);
+      broadcastToOthersInRoom(ws, message);
     }
     break;    
     }
@@ -107,6 +104,19 @@ function generateRoomCode(){
     result += characters.charAt(Math.floor(Math.random() * characters.length));
   }
   return result;
+}
+
+function broadcastToOthersInRoom(ws, message){
+  const players = rooms.get(ws.room);
+
+  if (players == undefined)
+    return;
+    
+  players.forEach((player) => {
+      if (player.client != ws && player.client.readyState === WebSocket.OPEN) {
+          player.client.send(message);
+      }
+  });  
 }
 
 function broadcastToRoom(room, message) {

@@ -59,11 +59,8 @@ p {
   left: 20px;
   border: none;
   top: -5px;
-  // box-shadow: 0 0 10px #000 inset;
-  // border: 1px solid rgba(255,255,255,0.1);
   border-radius: 15px;
   transition: 0.2s;
-  // background-color: #9f2810;
   height: 70px;
   -webkit-transition: 0.2s;
   display: inline-block;
@@ -276,8 +273,10 @@ body {
 
     img {
       margin-top: 5px;
-      margin-bottom: 10px;
+      margin-bottom: 20px;
       width: 80px;
+      left: 130;
+      position: relative;
     }
 
     button{
@@ -306,6 +305,33 @@ body {
   display: inline-block;
   margin: 15px 10px;
 }
+
+  input{
+    position: relative;
+    left: 115;
+    top: -20;
+    height: 35px;
+    width: 200px;
+    border: 3px solid #2e5248;
+    background: #fdffdc;
+    border-radius: 5px;
+    font-family: 'Commodore 64 Rounded';
+  }
+
+  .label{
+    position: relative;
+    top: -25;
+    left: 115px;
+  }
+
+  .input-name{
+    position: relative;
+  }
+
+  .input-id{
+    position: relative;
+    top: -30;
+  }
 }
 
 .buttons{
@@ -579,7 +605,67 @@ box-shadow:
 transition: all .5s ease;
 }
 
+.oval {
+  position: relative;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  width: 50px;
+  height: 50px;
+  border: 3px solid #2e5248;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  font: normal 100%/normal Arial, Helvetica, sans-serif;
+  color: rgba(0,0,0,1);
+  -o-text-overflow: clip;
+  text-overflow: clip;
+  background: rgba(231,76,60,1);
+  -webkit-box-shadow: 0 0 0 5px rgba(252,255,193,1) inset;
+  box-shadow: 0 0 0 5px rgba(252,255,193,1) inset;
+  left:75;
+  top:40;
 
+  i{
+    position: relative;
+    left: 14px;
+    top: 12px;
+    font-size: 25px;
+    color: #113028;
+  }
+}
+
+.square {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  position: relative;
+  top:-25;
+  left: 150;
+  width: 100px;
+  height: 40px;
+  border: 3px solid #2e5248;
+    -webkit-border-radius: 18% / 50%;
+  border-radius: 18% / 50%;
+  font: normal 100%/normal Arial, Helvetica, sans-serif;
+  color: rgba(0,0,0,1);
+  -o-text-overflow: clip;
+  text-overflow: clip;
+  background: #00a651;
+  -webkit-box-shadow: 0 0 0 5px rgba(252,255,193,1) inset;
+  box-shadow: 0 0 0 5px rgba(252,255,193,1) inset;
+
+button{
+  cursor: pointer;
+
+}
+
+  p{
+    position: relative;
+    right: 20;
+    top:0;
+    cursor: pointer;
+  }
+}
 /* The animation code */
 @keyframes led-blink {
   0%,

@@ -1,4 +1,4 @@
-var storageBoxPuzzle = new Puzzle("STORAGE_BOX", "./html/puzzle-storage-box.html", 
+var storageBoxPuzzle = new Puzzle("STORAGE_BOX", false, "./html/puzzle-storage-box.html", 
 
     function (webAppSetup) {
     var trainID = "Train Number: " + webAppSetup.trainID;

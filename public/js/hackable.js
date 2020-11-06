@@ -4,9 +4,13 @@ class Hackable{
     unlocked = true;
     navigatorContainer;
     navigatorButton;
+    persistent = false;
 
-    constructor(id) {
+    constructor(id, persistent) {
+        
         this.id = id;
+        this.persistent = persistent;
+
         hackables.set(this.id, this);
 
         ws.addEventListener('message', (event) => {
@@ -55,6 +59,6 @@ class Hackable{
 
         this.navigatorButton = btn;
 
-        this.hideNavigatorButton();
+        //this.hideNavigatorButton();
     }
 }

@@ -1,4 +1,4 @@
-var infoPassengersList = new Puzzle("INFO_PASSENGERLIST", "./html/info-passengers-list.html", 
+var infoPassengersList = new Puzzle("INFO_PASSENGERLIST", true, "./html/info-passengers-list.html", 
 
     function (webAppSetup) {
 

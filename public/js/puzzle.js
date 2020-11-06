@@ -1,8 +1,8 @@
 class Puzzle extends Hackable{
   
-  constructor(puzzleId, htmlPath, setupCallback = {}, responseCallback = {}, inputCallback = {}){
+  constructor(puzzleId, persistent, htmlPath, setupCallback = {}, responseCallback = {}, inputCallback = {}){
 
-    super(puzzleId);
+    super(puzzleId, persistent);
 
     ws.addEventListener('message', (event) => {
       var webAppMessage = JSON.parse(event.data);

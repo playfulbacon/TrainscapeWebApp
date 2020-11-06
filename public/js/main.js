@@ -89,7 +89,8 @@ ws.addEventListener('message', (event) => {
 
     // hide all hackables
     hackables.forEach(hackable => {
-      hackable.hideNavigatorButton();
+      if (!hackable.persistent)
+        hackable.hideNavigatorButton();
     });
 
     // show puzzles in current wagon

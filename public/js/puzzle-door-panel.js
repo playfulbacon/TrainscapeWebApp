@@ -1,4 +1,4 @@
-var doorPanelPuzzle = new Puzzle("DOOR_PANEL", "./html/puzzle-door-panel.html", 
+var doorPanelPuzzle = new Puzzle("DOOR_PANEL", false, "./html/puzzle-door-panel.html", 
 
     function (webAppSetup) {
         for(let i = 0; i < webAppSetup.buttonRows * webAppSetup.buttonCols; i++){

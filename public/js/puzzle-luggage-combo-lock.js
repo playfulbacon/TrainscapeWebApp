@@ -1,4 +1,4 @@
-var puzzleLuggageComboLock = new Puzzle("PUZZLE_LUGGAGECOMBOLOCK", false, "./html/puzzle-luggage-combo-lock.html", 
+var puzzleLuggageComboLock = new Puzzle("PUZZLE_LUGGAGECOMBOLOCK", "./html/puzzle-luggage-combo-lock.html", 
 
     function (webAppSetup) {
 

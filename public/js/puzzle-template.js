@@ -1,4 +1,4 @@
-var templatePuzzle = new Puzzle("TEMPLATE_PUZZLE", false, "./html/template-puzzle.html", 
+var templatePuzzle = new Puzzle("TEMPLATE_PUZZLE", "./html/template-puzzle.html", 
 
     function (webAppSetup) {
         //templatePuzzle.sendData(webAppData);

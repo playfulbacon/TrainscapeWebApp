@@ -6,10 +6,9 @@ class Hackable{
     navigatorButton;
     persistent = false;
 
-    constructor(id, persistent) {
+    constructor(id) {
         
         this.id = id;
-        this.persistent = persistent;
 
         hackables.set(this.id, this);
 

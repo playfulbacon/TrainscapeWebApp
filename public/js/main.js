@@ -40,7 +40,7 @@ function returnToNavigator(){
 
   document.querySelector('#' + currentHackableId).hidden = true;
 
-  state.current = states.MENU;
+  state.current = states.HACKABLES;
 
   ws.send(JSON.stringify({messageType: currentHackableId + '_DESELECTED'}));
 }

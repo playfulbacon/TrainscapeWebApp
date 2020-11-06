@@ -69,8 +69,13 @@ ws.addEventListener('message', (event) => {
     
     state.current = states.CONNECTING;
 
+    var playerData = {
+      playerName: document.querySelector('#name-input').value
+    }
+
     var message = {
       messageType: 'WEB_APP_PLAYER_JOINED',
+      data: JSON.stringify(playerData)
     };
 
     ws.send(JSON.stringify(message));
@@ -112,7 +117,6 @@ document.querySelector('#back-button').addEventListener('click', () => {
 });
 
 document.querySelector('#connect-button').addEventListener('click', () => {
-  console.log("connect button pressed");
 
   var roomCode =  document.querySelector('#room-code-input').value.toLowerCase();
 

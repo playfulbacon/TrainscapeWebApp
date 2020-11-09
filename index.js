@@ -19,7 +19,7 @@ const roomClients = new Map();
 // Add a test room manually
 rooms.set('test', []);
 
-const ignoreRoomCodes = ['test', 'tits', 'jizz', 'fuck', 'shit', 'piss', 'hoes'];
+const ignoreRoomCodes = ['test', 'tits', 'jizz', 'fuck', 'shit', 'piss', 'hoes', 'fart', 'bumb', 'cock', 'cunt', 'kunt', 'kill', 'hate'];
 
 const wss = new WebSocket.Server({ server });
 

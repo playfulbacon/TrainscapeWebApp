@@ -9,19 +9,19 @@
   <body>
   
     <div class="connect" id="STATE_CONNECT">
-      <div class="message"><p>Welcome Hacker,<br> Please enter your Hacker ID to connect with your agent.</p></div>
+      <div class="message"><p>Welcome,<br> Please enter the 4-digit code displayed on your partner's screen.</p></div>
       
       <div style="margin-top:20px;"></div>
       <input type="text" id="name-input" placeholder="NAME" maxlength="12"/>
       <div style="margin-top:20px;"></div>
-      <br><input class="hackerid" type="text" id="room-code-input" placeholder="HACKER ID" maxlength="4" style="text-transform:uppercase" />
+      <br><input class="hackerid" type="text" id="room-code-input" placeholder="GAME CODE" maxlength="4" style="text-transform:uppercase" />
       <div style="margin-top:20px;"></div>
       <br><button id="connect-button">CONNECT</button>
 
     </div>
    
     <div class="connect" id="STATE_CONNECTING">
-      <div><p>Connected!<br><br> Waiting for your agent to start the game...</p></div>
+      <div><p>Connected!<br><br> Waiting for the game to start...</p></div>
     </div>
 
     <button id="back-button">&lt; BACK</button>
@@ -55,9 +55,11 @@
   <script src="js/info-passengers-list.js"></script>
   <script src="js/puzzle-train-settings.js"></script>
   <script src="js/puzzle-luggage-combo-lock.js"></script>
+  <script src="js/puzzle-vip-list.js"></script>
 
   <script>
     // TEST PUZZLES   
+    /*
     new Puzzle("Wagon_1_A");
     new Puzzle("Wagon_1_B");
     new Puzzle("Wagon_1_C");
@@ -69,7 +71,7 @@
     new Puzzle("Wagon_3_A");
     new Puzzle("Wagon_3_B");
     new Puzzle("Wagon_3_C");
-    
+    */
   </script>
 
 </html>

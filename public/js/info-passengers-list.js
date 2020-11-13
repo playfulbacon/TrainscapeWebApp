@@ -18,7 +18,7 @@ var infoPassengersList = new Puzzle("INFO_PASSENGERLIST", "./html/info-passenger
             name.innerHTML = webAppSetup.names[index];
             entry.appendChild(name);
             
-            //seat id
+            //cabin id
             var cabin = document.createElement("TD");
             cabin.setAttribute('id', "cabin-" + index);
             //seat.innerHTML = webAppSetup.cabins[index];
@@ -31,19 +31,6 @@ var infoPassengersList = new Puzzle("INFO_PASSENGERLIST", "./html/info-passenger
                 cabin.appendChild(symbol);
             }
             entry.appendChild(cabin);
-
-            //luggage tag
-            /*var luggage = document.createElement("TD");
-            luggage.setAttribute('id', "luggage-" + index);
-            for (var i = 0; i < webAppSetup.luggageSymbols[index].length; i++)
-            {
-                var symbol = document.createElement("IMG");
-                symbol.width = "32";
-                symbol.height = "32";
-                symbol.src = symbols[webAppSetup.luggageSymbols[index].substring(i,i+1)];
-                luggage.appendChild(symbol);
-            }
-            entry.appendChild(luggage);*/
         }
 
     },

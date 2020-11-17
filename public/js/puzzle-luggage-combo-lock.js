@@ -9,9 +9,7 @@ var puzzleLuggageComboLock = new Puzzle("PUZZLE_LUGGAGECOMBOLOCK", "./html/puzzl
         var currentLookupTag = -1;
 
         //start with below inputs hidden
-        document.querySelector("#input-luggage-code").value = "";
-        document.querySelector("#input-luggage-code").style.display = "none";
-        document.querySelector("#button-send-code").style.display = "none";
+        document.querySelector("#div-passcode").style.display = "none";
 
 
         //search for matching luggage tag id to show security question / input field for entering passcode
@@ -26,28 +24,24 @@ var puzzleLuggageComboLock = new Puzzle("PUZZLE_LUGGAGECOMBOLOCK", "./html/puzzl
                 if (luggagePuzzleTags.includes(document.querySelector("#input-serial-id").value))
                 {
                     //show security question, input field, send button
-                    document.querySelector("#result-search").innerHTML = luggagePuzzleHints[currentLookupTag];
+                    document.querySelector("#result-search").innerHTML = "- LUGGAGE FOUND -<br>";
+                    document.querySelector("#div-passcode").style.display = "block";
+                    document.querySelector("#security-question").innerHTML = luggagePuzzleHints[currentLookupTag];
                     document.querySelector("#input-luggage-code").value = "";
-                    document.querySelector("#input-luggage-code").style.display = "block";
-                    document.querySelector("#button-send-code").style.display = "block";
                     document.querySelector("#response").innerHTML = "";
                 }
                 else
                 {
                     //hide security question, input field, send button
-                    document.querySelector("#result-search").innerHTML = "- ACCESS DENIED -<br>- HIGH LEVEL ENCRYPTION -";
-                    document.querySelector("#input-luggage-code").value = "";
-                    document.querySelector("#input-luggage-code").style.display = "none";
-                    document.querySelector("#button-send-code").style.display = "none";
+                    document.querySelector("#result-search").innerHTML = "- LUGGAGE FOUND -<br><br>- HIGH LEVEL ENCRYPTION -";
+                    document.querySelector("#div-passcode").style.display = "none";
                 }
             }
             else
             {
                 //hide security question, input field, send button
-                document.querySelector("#result-search").innerHTML = "- NO RESULTS -";
-                document.querySelector("#input-luggage-code").value = "";
-                document.querySelector("#input-luggage-code").style.display = "none";
-                document.querySelector("#button-send-code").style.display = "none";
+                document.querySelector("#result-search").innerHTML = "- LUGGAGE NOT FOUND -";
+                document.querySelector("#div-passcode").style.display = "none";
             }
         });
 

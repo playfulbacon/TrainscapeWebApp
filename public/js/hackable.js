@@ -48,14 +48,14 @@ class Hackable{
         var btn = document.createElement("BUTTON");
         btn.innerHTML = this.id;
 
-        var table = document.getElementById("navigator-buttons");
-        var row = table.insertRow(0);
-        row.setAttribute('id', this.id + "-navigator-button");
-        var cell = row.insertCell(0);
-        cell.appendChild(btn);
-
-        this.navigatorContainer = row;
-
+        var navigatorButtonsDiv = document.getElementById("navigator-buttons");
+        //var row = table.insertRow(0);
+        //row.setAttribute('id', this.id + "-navigator-button");
+        //var cell = row.insertCell(0);
+        //cell.appendChild(btn);
+        navigatorButtonsDiv.appendChild(btn);
+        
+        this.navigatorContainer = btn;
         this.navigatorButton = btn;
 
         //this.hideNavigatorButton();

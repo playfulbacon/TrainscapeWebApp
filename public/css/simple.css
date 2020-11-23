@@ -1,8 +1,8 @@
 body {
-  position: fixed;
-  width: 75%;
-  left: 50%;
-  transform: translate(-50%);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
 
   margin-top: 20px;
   padding: 0;
@@ -21,7 +21,8 @@ table{
 }
 
 .navigator table{
-  width: 75%;
+
+
 }
 
 input{
@@ -37,18 +38,16 @@ button{
   padding: 10px;
   color: white;
   background-color: black;
+
 }
 
 .puzzle-button{
   width: 60;
   height: 60;
+
 }
 
-.navigator button{
-  padding: 18px;
-  width: 100%;
-  text-align: left;
-}
+
 
 .collapsible {
   padding: 18px;

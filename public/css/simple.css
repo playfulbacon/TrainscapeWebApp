@@ -3,14 +3,12 @@ body {
   flex-direction: row;
   justify-content: center;
   align-items: flex-start;
-
   margin-top: 20px;
   padding: 0;
-
   text-align: center;
 }
 
-table{
+#navigator-buttons{
   margin-left: auto;
   margin-right: auto;
   border-spacing: 20px;
@@ -18,12 +16,9 @@ table{
   margin-top: 20px;
   margin-bottom: 20px;
   border-radius: 10px;
+  max-width: 400px;
 }
 
-.navigator table{
-
-
-}
 
 input{
   border-radius: 10px;
@@ -36,18 +31,20 @@ button{
   outline: none;
   border-radius: 10px;
   padding: 10px;
+  width: 80px;
+  height: 80px;
   color: white;
+  margin: 5px;
   background-color: black;
-
+  font-size: 10px;
 }
+
+
 
 .puzzle-button{
   width: 60;
   height: 60;
-
 }
-
-
 
 .collapsible {
   padding: 18px;

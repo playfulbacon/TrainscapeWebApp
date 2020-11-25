@@ -1,4 +1,4 @@
-var drinkDispenserPuzzle = new Puzzle("DRINK_DISPENSER", "./html/puzzle-drink-dispenser.html", 
+var drinkDispenserPuzzle = new Puzzle("DRINK_DISPENSER", "Drink Dispenser", "./html/puzzle-drink-dispenser.html", 
 
     function (webAppSetup) {
     var drinkRecipes = webAppSetup.drinkRecipes;       

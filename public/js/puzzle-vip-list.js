@@ -1,4 +1,4 @@
-var puzzleVipList = new Puzzle("VIP_LIST", "./html/puzzle-vip-list.html", 
+var puzzleVipList = new Puzzle("VIP_LIST", "VIP List", "./html/puzzle-vip-list.html", 
 
     // setup callback
     function (webAppSetup) {

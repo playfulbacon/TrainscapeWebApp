@@ -1,4 +1,4 @@
-var templatePuzzle = new Puzzle("TEMPLATE_PUZZLE", "./html/template-puzzle.html", 
+var templatePuzzle = new Puzzle("TEMPLATE_PUZZLE", "Template", "./html/template-puzzle.html", 
 
     // setup callback
     function (webAppSetup) {

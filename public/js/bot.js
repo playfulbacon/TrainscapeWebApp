@@ -2,9 +2,11 @@ class Bot extends Hackable {
   
     botInfo = ["-EMPTY-","-EMPTY-","-EMPTY-","-EMPTY-"];
 
-    constructor(botId){
+    constructor(botId, displayName){
   
         super(botId);
+
+        this.setDisplayName(displayName);
 
         ws.addEventListener('message', (event) => {
             var webAppMessage = JSON.parse(event.data);

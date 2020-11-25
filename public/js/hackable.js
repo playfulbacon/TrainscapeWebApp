@@ -5,10 +5,12 @@ class Hackable{
     navigatorContainer;
     navigatorButton;
     persistent = false;
+    displayName = 'DISPLAY NAME';
 
     constructor(id) {
         
         this.id = id;
+        this.displayName = id;
 
         hackables.set(this.id, this);
 
@@ -44,19 +46,19 @@ class Hackable{
         this.navigatorContainer.hidden = false;
     }
 
+    setDisplayName(displayName){
+        this.displayName = displayName;
+        this.navigatorButton.innerHTML = displayName; 
+    }
+
     createNavigatorButton() {
-        var btn = document.createElement("BUTTON");
-        btn.innerHTML = this.id;
+        var button = document.createElement("BUTTON");
 
         var navigatorButtonsDiv = document.getElementById("navigator-buttons");
-        //var row = table.insertRow(0);
-        //row.setAttribute('id', this.id + "-navigator-button");
-        //var cell = row.insertCell(0);
-        //cell.appendChild(btn);
-        navigatorButtonsDiv.appendChild(btn);
+        navigatorButtonsDiv.appendChild(button);
         
-        this.navigatorContainer = btn;
-        this.navigatorButton = btn;
+        this.navigatorContainer = button;
+        this.navigatorButton = button;
 
         //this.hideNavigatorButton();
     }

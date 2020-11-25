@@ -25,13 +25,13 @@ fetch("./html/bot.html")
     }
 });
 
-var owen = new Bot("BOT_OWEN");
-var darcy = new Bot("BOT_DARCY");
-var harriet = new Bot("BOT_HARRIET");
-var francesca = new Bot("BOT_FRANCESCA");
-var brock = new Bot("BOT_BROCK");
-var finley = new Bot("BOT_FINLEY");
-var cash = new Bot("BOT_CASH");
-var frederick = new Bot("BOT_FREDERICK");
-var oliver = new Bot("BOT_OLIVER");
-var rosalind = new Bot("BOT_ROSALIND");
+//var owen = new Bot("BOT_OWEN", "Owen");
+//var darcy = new Bot("BOT_DARCY", "Darcy");
+//var harriet = new Bot("BOT_HARRIET", "Harriet");
+//var francesca = new Bot("BOT_FRANCESCA", "Francesca");
+//var brock = new Bot("BOT_BROCK", "Brock");
+//var finley = new Bot("BOT_FINLEY", "Finley");
+//var cash = new Bot("BOT_CASH", "Cash");
+//var frederick = new Bot("BOT_FREDERICK", "Frederick");
+//var oliver = new Bot("BOT_OLIVER", "Oliver");
+//var rosalind = new Bot("BOT_ROSALIND", "Rosalind");

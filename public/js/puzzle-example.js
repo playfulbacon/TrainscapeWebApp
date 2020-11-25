@@ -1,4 +1,4 @@
-var puzzleExample = new Puzzle("PUZZLE_EXAMPLE", "./html/puzzle-example.html", 
+var puzzleExample = new Puzzle("PUZZLE_EXAMPLE", "Example", "./html/puzzle-example.html", 
 
     function (webAppSetup) {
         //puzzleExample.sendData(webAppData);

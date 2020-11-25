@@ -1,4 +1,4 @@
-var puzzleTrainSettings = new Puzzle("PUZZLE_TRAINSETTINGS", "./html/puzzle-train-settings.html", 
+var puzzleTrainSettings = new Puzzle("PUZZLE_TRAINSETTINGS", "Train Settings", "./html/puzzle-train-settings.html", 
 
     function (webAppSetup) {
 

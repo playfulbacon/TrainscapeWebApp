@@ -2,6 +2,39 @@ var puzzleLuggageComboLock = new Puzzle("PUZZLE_LUGGAGECOMBOLOCK", "Luggage", ".
 
     function (webAppSetup) {
 
+        //symbols ref
+        var symbols = ["img/symbol_1.png","img/symbol_2.png","img/symbol_3.png","img/symbol_4.png","img/symbol_5.png","img/symbol_6.png"];
+        var names = webAppSetup.names;
+        var cabins = webAppSetup.cabins;
+
+        //generate passenger list display by iterating through lists of names, cabins, luggage
+        for (var index = 0; index < names.length; index++)
+        {
+            //table row
+            var entry = document.createElement("TR");
+            document.querySelector('#table-passengers').appendChild(entry);
+
+            //name
+            var name = document.createElement("TD");
+            name.setAttribute('id', "name-" + index);
+            name.innerHTML = names[index];
+            entry.appendChild(name);
+            
+            //cabin id
+            var cabin = document.createElement("TD");
+            cabin.setAttribute('id', "cabin-" + index);
+            for (var i = 0; i < cabins[index].length; i++)
+            {
+                var symbol = document.createElement("IMG");
+                symbol.width = "32";
+                symbol.height = "32";
+                symbol.src = symbols[webAppSetup.cabins[index].substring(i,i+1)];
+                cabin.appendChild(symbol);
+            }
+            entry.appendChild(cabin);
+        }
+
+
         //store luggage tags / hints for reference when entering tag serial code to find luggage to hack
         var luggageAllTags = webAppSetup.luggageAllTags;
         var luggagePuzzleTags = webAppSetup.luggagePuzzleTags;
@@ -10,7 +43,6 @@ var puzzleLuggageComboLock = new Puzzle("PUZZLE_LUGGAGECOMBOLOCK", "Luggage", ".
 
         //start with below inputs hidden
         document.querySelector("#div-passcode").style.display = "none";
-
 
         //search for matching luggage tag id to show security question / input field for entering passcode
         document.querySelector("#button-search-id").addEventListener('click', function()

@@ -58,7 +58,7 @@ var puzzleLuggageComboLock = new Puzzle("PUZZLE_LUGGAGECOMBOLOCK", "Luggage", ".
                     //show security question, input field, send button
                     document.querySelector("#result-search").innerHTML = "- LUGGAGE FOUND -<br>";
                     document.querySelector("#div-passcode").style.display = "block";
-                    document.querySelector("#security-question").innerHTML = luggagePuzzleHints[currentLookupTag];
+                    document.querySelector("#security-question").innerHTML = luggagePuzzleHints[0];
                     document.querySelector("#input-luggage-code").value = "";
                     document.querySelector("#response").innerHTML = "";
                 }

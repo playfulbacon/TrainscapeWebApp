@@ -1,20 +1,49 @@
 var drinkDispenserPuzzle = new Puzzle("DRINK_DISPENSER", "Drink Dispenser", "./html/puzzle-drink-dispenser.html", 
 
     function (webAppSetup) {
-    //var drinkRecipes = webAppSetup.drinkRecipes;       
-    //document.querySelector('#drink-recipes').innerHTML = drinkRecipes;
+    
+        //var drinkRecipes = webAppSetup.drinkRecipes;       
+        //document.querySelector('#drink-recipes').innerHTML = drinkRecipes;
 
-    for(let i = 0; i < 6; i++){
-        document.querySelector('#drink-button-' + i).addEventListener('click',function()
+        var canisterNames = webAppSetup.canisterNames;
+        
+        for (let index = 0; index < canisterNames.length; index++)
         {
-            var webAppData = {
-                buttonIndex: i
-            }
+            var button = document.createElement("BUTTON");
+            button.setAttribute('id', "dispenser-button-" + index);
+            button.setAttribute('class', "puzzle-button");
+            button.innerHTML = canisterNames[index];
+            button.addEventListener("click", function () {
+                var webAppData = {
+                    buttonIndex: index
+                }
+                drinkDispenserPuzzle.sendData(webAppData);
+            });
 
-            drinkDispenserPuzzle.sendData(webAppData);
-        });
-    }
+            var tableColumn = document.createElement("TD");
+            tableColumn.setAttribute('id', "dispenser-button-" + index);
+            tableColumn.appendChild(button);
+            document.querySelector('#dispenser-buttons').appendChild(tableColumn);
+        }
+
     },
 
-    function(){}
+    // response callback
+    function(webAppResponse){
+
+    },
+
+    // input callback
+    function(webAppInput){
+
+        var canisterNames = webAppInput.canisterNames;
+        
+        var dispenserButtons = document.getElementsByClassName("puzzle-button");
+
+        for (let index = 0; index < dispenserButtons.length; index++)
+        {
+            dispenserButtons[index].innerHTML = canisterNames[index];
+        }
+
+    }
 );

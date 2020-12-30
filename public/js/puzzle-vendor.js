@@ -4,7 +4,7 @@ var puzzleVendor = new Puzzle("PUZZLE_VENDOR", "Vendor", "./html/puzzle-vendor.h
 
         //stored variables since need to send all variables back
         var updateChannel = -1;
-        var updateMove = false;
+        var updateMoveDir = 0;
         var updateSnackIndex = -1;
         var updateSnackPrice = -1;
 
@@ -23,19 +23,27 @@ var puzzleVendor = new Puzzle("PUZZLE_VENDOR", "Vendor", "./html/puzzle-vendor.h
         }
 
         //vendor positions button setup
-        document.querySelector('#vendor-position-button-start').addEventListener("click", function () {
-            updateMove = false;
+        document.querySelector('#vendor-position-button-left').addEventListener("mousedown", function () {
+            updateMoveDir = -1;
             updateVendor();
         });
-        document.querySelector('#vendor-position-button-stop').addEventListener("click", function () {
-            updateMove = true;
+        document.querySelector('#vendor-position-button-left').addEventListener("mouseup", function () {
+            updateMoveDir = 0;
+            updateVendor();
+        });
+        document.querySelector('#vendor-position-button-right').addEventListener("mousedown", function () {
+            updateMoveDir = 1;
+            updateVendor();
+        });
+        document.querySelector('#vendor-position-button-right').addEventListener("mouseup", function () {
+            updateMoveDir = 0;
             updateVendor();
         });
 
         //vendor prices button setup
         var snackPrices = webAppSetup.snackPrices;
         let updatedSnackPrices = snackPrices;
-        var priceChangeValue = 0.5;
+        var priceChangeValue = 0.25;
         for (let index = 0; index < snackPrices.length; index++)
         {
             var minusButton = document.createElement("BUTTON");
@@ -62,7 +70,7 @@ var puzzleVendor = new Puzzle("PUZZLE_VENDOR", "Vendor", "./html/puzzle-vendor.h
                 }
             });
             plusButton.addEventListener("click", function () {
-                if ((updatedSnackPrices[index] + priceChangeValue) < 5)
+                if ((updatedSnackPrices[index] + priceChangeValue) <= 3)
                 {
                     updateSnackIndex = index;
                     updateSnackPrice = updatedSnackPrices[index] + priceChangeValue;
@@ -88,7 +96,7 @@ var puzzleVendor = new Puzzle("PUZZLE_VENDOR", "Vendor", "./html/puzzle-vendor.h
         function updateVendor() {
             var webAppData = {
                 newChannel: updateChannel,
-                moveVendor: updateMove,
+                moveVendorDir: updateMoveDir,
                 updateSnackIndex: updateSnackIndex,
                 newSnackPrice: updateSnackPrice
             }

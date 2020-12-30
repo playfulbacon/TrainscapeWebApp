@@ -11,7 +11,7 @@ var drinkDispenserPuzzle = new Puzzle("DRINK_DISPENSER", "Drink Dispenser", "./h
         {
             var button = document.createElement("BUTTON");
             button.setAttribute('id', "dispenser-button-" + index);
-            button.setAttribute('class', "puzzle-button");
+            button.setAttribute('class', "dispenser-buttons");
             button.innerHTML = canisterNames[index];
             button.addEventListener("click", function () {
                 var webAppData = {
@@ -38,7 +38,7 @@ var drinkDispenserPuzzle = new Puzzle("DRINK_DISPENSER", "Drink Dispenser", "./h
 
         var canisterNames = webAppInput.canisterNames;
         
-        var dispenserButtons = document.getElementsByClassName("puzzle-button");
+        var dispenserButtons = document.getElementsByClassName("dispenser-buttons");
 
         for (let index = 0; index < dispenserButtons.length; index++)
         {

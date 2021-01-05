@@ -45,20 +45,20 @@ function returnToNavigator(){
   ws.send(JSON.stringify({messageType: currentHackableId + '_DESELECTED'}));
 }
 
-function selectPuzzle(puzzleId){
-  selectHackable(puzzleId);
+function selectPuzzle(id){
+  selectHackable(id);
 
-  ws.send(JSON.stringify({messageType: puzzleId + '_SELECTED'}));
+  ws.send(JSON.stringify({messageType: id + '_SELECTED'}));
 }
 
 function missionStarted() {
-  console.log("mission started");
+  console.log("Mission started");
 
   state.current = states.HACKABLES;
 }
 
 ws.addEventListener('open', function(event){
-  console.log('Connection opened!');
+  console.log('Connection opened');
 });
 
 ws.addEventListener('message', (event) => {
@@ -88,6 +88,8 @@ ws.addEventListener('message', (event) => {
   }
 
   if (webAppMessage.messageType == "WAGON_ENTERED"){
+    console.log("Wagon entered");
+
     var wagonIndex = parseInt(webAppMessage.data);
 
     document.querySelector('#wagon-name').innerHTML = puzzleGroups[wagonIndex].groupName;
@@ -101,8 +103,8 @@ ws.addEventListener('message', (event) => {
     // show puzzles in current wagon
     var puzzleIds = puzzleGroups[wagonIndex].puzzleIds;
 
-    puzzleIds.forEach(puzzleId => {
-      hackables.get(puzzleId).groupEntered();
+    puzzleIds.forEach(id => {
+      hackables.get(id).groupEntered();
     });
   }
 

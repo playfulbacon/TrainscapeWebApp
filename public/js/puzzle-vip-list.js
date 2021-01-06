@@ -2,54 +2,40 @@ var puzzleVipList = new Puzzle("VIP_LIST", "VIP List", "./html/puzzle-vip-list.h
 
     // setup callback
     function (webAppSetup) {
-        //show security bot password protection first, then once correct, only show vib list from then on
-        document.querySelector("#div-security-passcode").style.display = "block";
-        document.querySelector("#div-vip-list").style.display = "none";
-
-        //security bot password protected
-        var securityBotPasscode = webAppSetup.securityBotPasscode;
         
-        document.querySelector("#passcode-button").addEventListener("click", function()
-        {
-            if (document.querySelector("#passcode-input").value.toUpperCase() === securityBotPasscode)
-            {
-                document.querySelector("#passcode-result").innerHTML = "- CORRECT PASSWORD -";
-                document.querySelector("#div-security-passcode").style.display = "none";
-                document.querySelector("#div-vip-list").style.display = "block";
-            }
-            else
-            {
-                document.querySelector("#passcode-result").innerHTML = "- INCORRECT PASSWORD -";
-            }
-        });
-
         //vip list setup
-        var defaultNames = webAppSetup.defaultNames;
+        var vipNumbers = webAppSetup.vipNumbers;
+        var vipNames = webAppSetup.vipNames;
 
         var table = document.getElementById("vip-list-table");
 
-        defaultNames.forEach((name) => {
+        for (let i = 0; i < vipNumbers.length; i++)
+        {
             var row = table.insertRow(0);
-            var cell = row.insertCell(0);
-            cell.innerHTML = name;
-        });
+            var cellPara = row.insertCell(0);
+            var cellInput = row.insertCell(1);
+            var cellButton = row.insertCell(2);
 
-        document.getElementById("vip-list-button").addEventListener("click", () => {   
-            var nameInput = document.getElementById('vip-list-input');
-            var name =  nameInput.value.toUpperCase();
-            nameInput.value = "";
+            cellPara.innerHTML = vipNumbers[i];
 
-            var table = document.getElementById("vip-list-table");
-            var row = table.insertRow(0);
-            var cell = row.insertCell(0);
-            cell.innerHTML = name;
-
-            var webAppData = {
-                name: name
-            }
+            var inputField = document.createElement("INPUT");
+            inputField.setAttribute("id", "vip-name-" + i);
+            inputField.setAttribute("style", "text-transform:uppercase");
+            inputField.value = vipNames[i];
+            cellInput.append(inputField);
             
-            puzzleVipList.sendData(webAppData);
-        });
+            var editButton = document.createElement("BUTTON");
+            editButton.innerHTML = "UPDATE";
+            editButton.addEventListener("click", function () {
+                var newName = document.querySelector('#vip-name-' + i).value.toUpperCase();
+                var webAppData = {
+                    name: newName
+                }
+                puzzleVipList.sendData(webAppData);
+            });
+            cellButton.append(editButton);
+        }
+
     },
 
     // response callback

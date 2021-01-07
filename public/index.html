@@ -7,21 +7,22 @@
   </head>
 
   <body>
-
     <div class="connect" id="STATE_CONNECT">
-      <div class="message"><p>Welcome,<br> Please enter the 4-digit code displayed on your partner's screen.</p></div>
+      <h1>SIDETRACKED</h1>
+
+      <div class="message"><p>Welcome,<br>Please enter the 4-digit code displayed on your partner's screen.</p></div>
 
       <div style="margin-top:20px;"></div>
       <input type="text" id="name-input" placeholder="NAME" maxlength="12"/>
       <div style="margin-top:20px;"></div>
-      <br><input class="hackerid" type="text" id="room-code-input" placeholder="GAME CODE" maxlength="4" style="text-transform:uppercase" />
+      <input class="hackerid" type="text" id="room-code-input" placeholder="GAME CODE" maxlength="4" style="text-transform:uppercase" />
       <div style="margin-top:20px;"></div>
-      <br><button id="connect-button">CONNECT</button>
+      <button id="connect-button">CONNECT</button>
 
     </div>
 
     <div class="connect" id="STATE_CONNECTING">
-      <div><p>Connected!<br><br> Waiting for the game to start...</p></div>
+      <div><p>Connected!<br><br>Waiting for the game to start...</p></div>
     </div>
 
     <button id="back-button">&lt; BACK</button>
@@ -29,7 +30,6 @@
 
     <div class= "navigator" id="STATE_HACKABLES">
       <h1 id="wagon-name">WAGON NAME</h1>
-      <!--<p>Hackable Objects</p>-->
       <table id="navigator-buttons"></table>
     </div>
 

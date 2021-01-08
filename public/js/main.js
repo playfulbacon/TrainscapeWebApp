@@ -70,7 +70,7 @@ ws.addEventListener('message', (event) => {
     state.current = states.CONNECTING;
 
     var playerData = {
-      playerName: document.querySelector('#name-input').value
+      firstName: document.querySelector('#name-input').value
     }
 
     var message = {

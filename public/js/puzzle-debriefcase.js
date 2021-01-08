@@ -1,4 +1,4 @@
-var debriefcasePuzzle = new Puzzle("DEBRIEFCASE", "Debriefcase", "./html/puzzle-debriefcase.html", 
+var debriefcasePuzzle = new Puzzle("DEBRIEFCASE", "Briefcase", "./html/puzzle-debriefcase.html", 
 
     function (webAppSetup) {
 

@@ -23,6 +23,8 @@ body {
 table{
   border: 2px dotted black;
   border-spacing: 10px;
+  display: flex;
+  justify-content: center;
 }
 
 input{

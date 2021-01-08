@@ -28,12 +28,12 @@
     <button id="back-button">&lt; BACK</button>
 
 
-    <div class= "navigator" id="STATE_HACKABLES">
+    <div class= "navigator" id="STATE_NAVIGATING">
       <h1 id="wagon-name">WAGON NAME</h1>
       <table id="navigator-buttons"></table>
     </div>
 
-    <div id="game-content"></div>
+    <div id="game-content"><h1 id="hackable-title"></h1></div>
 
     <pre id="messages" hidden></pre>
 
@@ -55,6 +55,7 @@
   <script src="js/puzzle-vip-list.js"></script>
 
   <script>
+    console.log(hackables);
     // TEST PUZZLES
     /*
     new Puzzle("Wagon_1_A");

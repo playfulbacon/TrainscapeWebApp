@@ -6,8 +6,8 @@ var puzzleGroups;
 const states = { 
   CONNECT: 'connect',
   CONNECTING: 'connecting',
-  HACKABLES: 'hackables',
-  PUZZLE: 'puzzle'
+  NAVIGATING: 'navigating',
+  HACKING: 'hacking'
 }
 
 var state = {
@@ -19,8 +19,8 @@ var state = {
 
     document.querySelector('#STATE_CONNECT').hidden = !(this.state == states.CONNECT);
     document.querySelector('#STATE_CONNECTING').hidden = !(this.state == states.CONNECTING);
-    document.querySelector('#STATE_HACKABLES').hidden = !(this.state == states.HACKABLES);
-    document.querySelector('#back-button').hidden = !(this.state == states.PUZZLE);
+    document.querySelector('#STATE_NAVIGATING').hidden = !(this.state == states.NAVIGATING);
+    document.querySelector('#back-button').hidden = !(this.state == states.HACKING);
 
     console.log("state set to: " + this.state);
   }
@@ -30,17 +30,17 @@ state.current = states.CONNECT;
 
 function selectHackable(id){
 
-  document.querySelector('#' + id).hidden = false;
   currentHackableId = id;
-
-  state.current = states.PUZZLE;
+  document.querySelector('#' + id).hidden = false;
+  document.querySelector('#hackable-title').innerHTML = hackables.get(id).displayName;
+  state.current = states.HACKING;
 }
 
 function returnToNavigator(){
 
   document.querySelector('#' + currentHackableId).hidden = true;
-
-  state.current = states.HACKABLES;
+  document.querySelector('#hackable-title').innerHTML = "";
+  state.current = states.NAVIGATING;
 
   ws.send(JSON.stringify({messageType: currentHackableId + '_DESELECTED'}));
 }
@@ -54,7 +54,7 @@ function selectPuzzle(id){
 function missionStarted() {
   console.log("Mission started");
 
-  state.current = states.HACKABLES;
+  state.current = states.NAVIGATING;
 }
 
 ws.addEventListener('open', function(event){
@@ -104,7 +104,7 @@ ws.addEventListener('message', (event) => {
     var puzzleIds = puzzleGroups[wagonIndex].puzzleIds;
 
     puzzleIds.forEach(id => {
-      hackables.get(id).groupEntered();
+      hackables.get(id).groupEntered(); //TODO: null ref of hackables[id]
     });
   }
 

@@ -22,28 +22,26 @@ var puzzleVendor = new Puzzle("PUZZLE_VENDOR", "Vendor", "./html/puzzle-vendor.h
             document.querySelector('#vendor-ads-buttons').appendChild(button);
         }
 
+        var buttonVendorMoveLeft = document.querySelector('#vendor-position-button-left');
+        var buttonVendorMoveRight = document.querySelector('#vendor-position-button-right');
+
         //vendor positions button setup
-        document.querySelector('#vendor-position-button-left').addEventListener("mousedown", function () {
-            updateMoveDir = -1;
-            updateVendor();
-        });
-        document.querySelector('#vendor-position-button-left').addEventListener("mouseup", function () {
-            updateMoveDir = 0;
-            updateVendor();
-        });
-        document.querySelector('#vendor-position-button-right').addEventListener("mousedown", function () {
-            updateMoveDir = 1;
-            updateVendor();
-        });
-        document.querySelector('#vendor-position-button-right').addEventListener("mouseup", function () {
-            updateMoveDir = 0;
-            updateVendor();
-        });
+        buttonVendorMoveLeft.addEventListener("mousedown", function () { moveVendor(-1)});
+        buttonVendorMoveLeft.addEventListener("mouseup", function () { moveVendor(0)});
+        buttonVendorMoveRight.addEventListener("mousedown", function () { moveVendor(1)});
+        buttonVendorMoveRight.addEventListener("mouseup", function () { moveVendor(0)});
+        buttonVendorMoveLeft.addEventListener("touchstart", function () { moveVendor(-1)});
+        buttonVendorMoveLeft.addEventListener("touchend", function () { moveVendor(0)});
+        buttonVendorMoveRight.addEventListener("touchstart", function () { moveVendor(1)});
+        buttonVendorMoveRight.addEventListener("touchend", function () { moveVendor(0)});
 
         //vendor prices button setup
         var snackPrices = webAppSetup.snackPrices;
         let updatedSnackPrices = snackPrices;
         var priceChangeValue = 0.25;
+
+        var table = document.getElementById("vendor-prices");
+
         for (let index = 0; index < snackPrices.length; index++)
         {
             var minusButton = document.createElement("BUTTON");
@@ -85,11 +83,25 @@ var puzzleVendor = new Puzzle("PUZZLE_VENDOR", "Vendor", "./html/puzzle-vendor.h
                 }
             });
 
-            var snackColumn = document.createElement("TD");
-            snackColumn.appendChild(plusButton);
-            snackColumn.appendChild(snackPrice);
-            snackColumn.appendChild(minusButton);
-            document.querySelector('#vendor-prices').appendChild(snackColumn);
+            var labelRow = table.insertRow(index * 2);
+            labelRow.insertCell(0);
+            var cellLabel = labelRow.insertCell(1);
+            labelRow.insertCell(2);
+            cellLabel.innerHTML = webAppSetup.snackNames[index];
+
+            var row = table.insertRow(index*2 + 1);
+            var cellMinus = row.insertCell(0);
+            var cellPrice = row.insertCell(1);
+            var cellPlus = row.insertCell(2);
+
+            cellPlus.append(plusButton);
+            cellPrice.append(snackPrice);
+            cellMinus.append(minusButton);
+        }
+
+        function moveVendor(direction){
+            updateMoveDir = direction;
+            updateVendor();
         }
 
         //sends all variables back to unity whenever any interaction on page sent
